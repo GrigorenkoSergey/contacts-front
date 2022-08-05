@@ -1,12 +1,11 @@
 import React from 'react';
 import s from './App.module.css';
+import { LoginForm } from './components';
 
-function App() {
+export function App() {
   return (
-    <div className={s.App}>
-      <h1 className={s.title}>Hello, world!</h1>
+    <div className={s.app}>
+      <LoginForm />
     </div>
   );
 }
-
-export default App;
