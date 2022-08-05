@@ -7,7 +7,7 @@ import s from './Field.module.css';
 type Props = {
   placeholder: string
   icon?: typeof User
-  type: 'text' | 'password' | 'number'
+  type: 'text' | 'password' | 'number' | 'email'
   className?: string
   value: string
   name?: string
@@ -15,7 +15,6 @@ type Props = {
   errorMessage: string
   autoComplite?: string
   disabled?: boolean
-  dataCy?: string
 
   onIconClick?: () => void
   onChange(v: string): void
@@ -25,7 +24,7 @@ type Props = {
 export function Field(x: Props) {
   const {
     placeholder, icon, type, className, name, value, invalid, errorMessage,
-    autoComplite, disabled, dataCy, onChange, onBlur, onIconClick
+    autoComplite, disabled, onChange, onBlur, onIconClick
   } = x;
 
   const Icon = icon ?? User;
@@ -46,7 +45,6 @@ export function Field(x: Props) {
                onChange={e => onChange(e.target.value)}
                onBlur={onBlur}
                disabled={disabled}
-               data-cy={dataCy}
                autoComplete={autoComplite} />
 
         <Icon className={s.icon} onClick={onIconClick} />

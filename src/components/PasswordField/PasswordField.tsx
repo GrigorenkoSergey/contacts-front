@@ -4,25 +4,25 @@ import { Field } from '../Field';
 
 type Props = {
   value: string
-  name: string
+  name?: string
   onChange(v: string): void
   className?: string
   invalid?: boolean
+  placeholder?: string
 };
 
 export function PasswordField(x: Props) {
-  const { value, name, className, invalid, onChange, } = x;
+  const { value, name, className, invalid, placeholder, onChange, } = x;
   const [type, setType] = useState<'password' | 'text'>('password');
 
   return (
     <Field className={className}
            type={type}
-           placeholder="Пароль"
+           placeholder={placeholder ?? 'Пароль'}
            value={value}
            name={name}
            onChange={onChange}
            invalid={invalid}
-           dataCy="password"
            errorMessage="Неверный пароль"
            autoComplite="current-password"
            icon={type === 'password' ? EyeOff : Eye}

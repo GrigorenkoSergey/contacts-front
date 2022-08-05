@@ -18,7 +18,6 @@ export function LoginField(x: Props) {
            placeholder="Логин"
            errorMessage="Неверный логин"
            autoComplite="username"
-           dataCy="login"
            invalid={invalid}
            value={value}
            name={name}

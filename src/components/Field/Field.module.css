@@ -77,6 +77,10 @@ input:-internal-autofill-selected~svg.icon path {
   stroke: var(--button-primary-color);
 }
 
+[name="email"].input:focus~svg.icon path {
+  fill: var(--button-primary-color);
+}
+
 .input:focus::placeholder {
   opacity: 0;
 }

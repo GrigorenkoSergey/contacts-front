@@ -15,7 +15,7 @@ export function LoginForm(x: Props) {
     <form className={cn(s.form, x.className)}
           name="auth"
           onSubmit={e => e.preventDefault()}>
-      <h2 className={s.title}>Приложение</h2>
+      <h2 className={s.title}>Войти</h2>
 
       <LoginField className={s.login}
                   value={login}
