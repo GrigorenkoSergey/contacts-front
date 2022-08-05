@@ -43,6 +43,7 @@ export function RegisterForm(x: Props) {
 
         <PasswordField className={s.password}
                        value={confirmedPassword}
+                       name="confirm-password"
                        placeholder="Подтверждение пароля"
                        onChange={setConfirmedPassword} />
       </div>

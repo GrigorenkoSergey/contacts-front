@@ -18,16 +18,20 @@ type Props = {
 
   onIconClick?: () => void
   onChange(v: string): void
-  onBlur?: () => void
 };
 
 export function Field(x: Props) {
   const {
     placeholder, icon, type, className, name, value, invalid, errorMessage,
-    autoComplite, disabled, onChange, onBlur, onIconClick
+    autoComplite, disabled, onChange, onIconClick
   } = x;
 
   const Icon = icon ?? User;
+
+  const handleIconClick = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+    onIconClick?.();
+    e.preventDefault();
+  };
 
   return (
     <fieldset className={cn(
@@ -43,11 +47,11 @@ export function Field(x: Props) {
                placeholder={placeholder}
                value={value}
                onChange={e => onChange(e.target.value)}
-               onBlur={onBlur}
                disabled={disabled}
                autoComplete={autoComplite} />
 
-        <Icon className={s.icon} onClick={onIconClick} />
+        <Icon className={s.icon}
+              onClick={handleIconClick} />
       </label>
 
       { invalid && <span className={s.errorMessage}>{ errorMessage }</span> }
