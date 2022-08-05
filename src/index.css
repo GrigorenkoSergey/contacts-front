@@ -13,4 +13,5 @@
 body {
   margin: 0;
   font-family: var(--font-family-primary);
+  padding: 20px;
 }
