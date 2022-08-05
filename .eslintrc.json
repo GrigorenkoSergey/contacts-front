@@ -208,6 +208,7 @@
       }
     ],
     "react/jsx-no-comment-textnodes": [ "error" ],
+    "jsx-quotes": [ "error", "prefer-double" ],
     "react-hooks/exhaustive-deps": "off",
     "import/no-default-export": [ "error" ],
     "import/order": [ "error" ],

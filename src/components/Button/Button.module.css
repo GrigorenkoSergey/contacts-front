@@ -1,0 +1,34 @@
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  border-radius: 6px;
+  border: 0;
+  cursor: pointer;
+  font-family: var(--font-family-primary);
+}
+
+.button:active {
+  outline: none;
+}
+
+.themePrimary {
+  background: #00acef;
+  color: #fff;
+}
+
+.themePrimary:hover {
+  background: #005eef;
+}
+
+.themePrimary[disabled] {
+  background: #00acef70;
+}
+
+.themePrimary:enabled:active, 
+.themePrimary_pressed {
+  background: #001162;
+}

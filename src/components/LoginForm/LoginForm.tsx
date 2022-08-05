@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { cn } from '../../utils';
-import { LoginField } from '../LoginField';
-import { PasswordField } from '../PasswordField';
+import { LoginField, Button, PasswordField } from '../';
 import s from './LoginForm.module.css';
 
 type Props = {
@@ -13,13 +12,25 @@ export function LoginForm(x: Props) {
   const [password, setPassword] = useState('');
 
   return (
-    <form className={cn(s.form, x.className)}>
+    <form className={cn(s.form, x.className)}
+          name="auth"
+          onSubmit={e => e.preventDefault()}>
+      <h2 className={s.title}>Приложение</h2>
+
       <LoginField className={s.login}
                   value={login}
+                  name="login"
                   onChange={setLogin} />
       <PasswordField className={s.password}
                      value={password}
+                     name="password"
                      onChange={setPassword} />
+      <Button>Войти</Button>
+
+      <p className={s.footer}>
+        Новичок?&nbsp;
+        <a href="/fake-ref">Регистрируйся!!</a>
+      </p>
     </form>
   );
 }

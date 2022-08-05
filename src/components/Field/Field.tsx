@@ -10,6 +10,7 @@ type Props = {
   type: 'text' | 'password' | 'number'
   className?: string
   value: string
+  name?: string
   invalid?: boolean
   errorMessage: string
   autoComplite?: string
@@ -23,7 +24,7 @@ type Props = {
 
 export function Field(x: Props) {
   const {
-    placeholder, icon, type, className, value, invalid, errorMessage,
+    placeholder, icon, type, className, name, value, invalid, errorMessage,
     autoComplite, disabled, dataCy, onChange, onBlur, onIconClick
   } = x;
 
@@ -39,6 +40,7 @@ export function Field(x: Props) {
       <label className={s.label}>
         <input className={s.input}
                type={type}
+               name={name}
                placeholder={placeholder}
                value={value}
                onChange={e => onChange(e.target.value)}

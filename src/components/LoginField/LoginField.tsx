@@ -3,13 +3,14 @@ import { Field } from '../Field';
 
 type Props = {
   value: string
+  name?: string
   onChange(v: string): void
   className?: string
   invalid?: boolean
 };
 
 export function LoginField(x: Props) {
-  const { onChange, invalid, value, className } = x;
+  const { onChange, invalid, value, className, name } = x;
 
   return (
     <Field className={className}
@@ -17,9 +18,10 @@ export function LoginField(x: Props) {
            placeholder="Логин"
            errorMessage="Неверный логин"
            autoComplite="username"
-           dataCy='login'
+           dataCy="login"
            invalid={invalid}
            value={value}
+           name={name}
            onChange={onChange} />
   );
 }
