@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { cn } from '../../utils';
 import { LoginField, Button, PasswordField } from '../';
 import s from './LoginForm.module.css';
@@ -29,7 +30,7 @@ export function LoginForm(x: Props) {
 
       <p className={s.footer}>
         Новичок?&nbsp;
-        <a href="/fake-ref">Регистрируйся!!</a>
+        <Link to="sign-up">Регистрируйся!!</Link>
       </p>
     </form>
   );

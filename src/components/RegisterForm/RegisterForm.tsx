@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Button, Field, LoginField, PasswordField } from '../';
+import { Link } from 'react-router-dom';
 import { Email } from '../../assets/icons';
 import { cn } from '../../utils';
+import { Button, Field, LoginField, PasswordField } from '../';
 
 import s from './RegisterForm.module.css';
 
@@ -49,6 +50,11 @@ export function RegisterForm(x: Props) {
       </div>
 
       <Button>Готово!</Button>
+
+      <p className={s.footer}>
+        Уже есть аккаунт?&nbsp;
+        <Link to="/">Войти!</Link>
+      </p>
     </form>
   );
 }
