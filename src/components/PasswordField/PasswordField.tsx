@@ -26,4 +26,4 @@ export function PasswordField(x: Props) {
            icon={type === 'password' ? EyeOff : Eye}
            onIconClick={() => setType(type === 'password' ? 'text' : 'password')} />
   );
-};
+}

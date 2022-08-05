@@ -38,6 +38,7 @@
 
   border: 0;
   font-size: var(--font-size);
+  font-family: var(--font-family-primary);
   padding-right: 40px;
   background: var(--button-primary-color);
   border-radius: inherit;
@@ -58,17 +59,21 @@
   cursor: pointer;
 }
 
+input:-internal-autofill-selected~svg.icon path {
+  stroke: gray;
+}
+
 .input:focus {
   outline: none;
   background-color: #fff;
   color: var(--button-primary-color);
 }
 
-.input ~ svg.icon path {
+.input~svg.icon path {
   stroke: white;
 }
 
-.input:focus ~ svg.icon path {
+.input:focus~svg.icon path {
   stroke: var(--button-primary-color);
 }
 
@@ -111,6 +116,6 @@
   stroke: var(--color-error);
 }
 
-.error .input ~ svg.icon path {
+.error .input~svg.icon path {
   stroke: var(--color-error);
 }

@@ -1,4 +1,8 @@
-.loginForm {
+.form {
   width: 100%;
   max-width: 300px;
+}
+
+.login {
+  margin-bottom: 20px;
 }

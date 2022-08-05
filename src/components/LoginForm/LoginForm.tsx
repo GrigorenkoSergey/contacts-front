@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { cn } from '../../utils';
 import { LoginField } from '../LoginField';
 import { PasswordField } from '../PasswordField';
@@ -9,12 +9,17 @@ type Props = {
 };
 
 export function LoginForm(x: Props) {
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
-    <div className={cn(s.loginForm, x.className)}>
-      <LoginField value='abc'
-                  onChange={() => { }} />
-      <PasswordField value=''
-                     onChange={() => { }} />
-    </div>
+    <form className={cn(s.form, x.className)}>
+      <LoginField className={s.login}
+                  value={login}
+                  onChange={setLogin} />
+      <PasswordField className={s.password}
+                     value={password}
+                     onChange={setPassword} />
+    </form>
   );
 }
