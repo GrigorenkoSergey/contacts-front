@@ -2,6 +2,64 @@
   border: 1px solid var(--primary-color);
   border-radius: 10px;
   padding: 20px;
+  box-shadow: 0 0 6px gray;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.user {
+  width: 40px;
+  height: 40px;
+  background-color: silver;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.userName {
+  flex-grow: 1;
+  font-size: 18px;
+}
+
+.search {
+  justify-self: flex-end;
+  margin-left: 10px;
+}
+
+.searchInput {
+  border-radius: 10000px;
+  border: 1px solid var(--primary-color);
+  outline: none;
+  padding: 5px 35px 5px 10px;
+  font-size: 14px;
+  background-image: url('../../assets/icons/search.svg');
+  background-repeat: no-repeat;
+  background-position: center right 10px;
+  background-size: 20px;
+}
+
+.searchInput:focus {
+  box-shadow: 0 0 5px gray;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add, .delete, .edit {
+  cursor: pointer;
+}
+
+.delete {
+  fill: red;
+  margin-left: 2px;
 }
 
 .list {
@@ -40,25 +98,12 @@
 }
 
 .edit {
-  cursor: pointer;
   margin-left: 10px;
   margin-right: 10px;
 }
 
 .edit path {
   fill: green;
-}
-
-.deleteWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.delete {
-  fill: red;
-  margin-left: 2px;
-  cursor: pointer;
 }
 
 .checkboxLabel {
@@ -70,6 +115,7 @@
 .checkboxInput {
   width: 0;
   height: 0;
+  margin: 0;
 }
 
 .checkbox {
