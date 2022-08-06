@@ -136,10 +136,20 @@ const mockPeople = [
   'Исламов Дмитрий'
 ];
 
+const character = ['crazy', 'furious', 'sad', 'happy', 'lucky', 'snoopy'];
+const animals = ['dog', 'squirrel', 'raccoon', 'snake', 'cat'];
+const mails = ['gmail.com', 'yandex.ru'];
+
 export const contacts = mockPeople.map((p, i) => ({
   id: i,
   name: p,
+
   phone: '8'
   + ['953', '921', '988'][randomInteger(0, 2)]
-  + randomInteger(1e6, 1e7 - 1)
+  + randomInteger(1e6, 1e7 - 1),
+
+  email: character[randomInteger(0, character.length - 1)]
+  + animals[randomInteger(0, animals.length - 1)]
+  + '@'
+  + mails[randomInteger(0, mails.length - 1)]
 }));
