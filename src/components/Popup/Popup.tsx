@@ -31,7 +31,7 @@ export function Popup(x: Props) {
     <div className={s.substrate}>
       <div className={s.popup}>
         <div className={s.header}>
-          <div className={s.title}>{ title }</div>
+          <h3 className={s.title}>{ title }</h3>
           <Close width={25}
                  className={s.closeBtn}
                  onClick={onCancel} />

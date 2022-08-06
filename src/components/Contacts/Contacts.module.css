@@ -94,6 +94,7 @@
 
 .listHeader {
   font-weight: bold;
+  min-height: 50px;
 }
 
 .checkboxContainer {
