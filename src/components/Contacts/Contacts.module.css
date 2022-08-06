@@ -54,18 +54,13 @@
   margin-left: 20px;
 }
 
-.list {
-  display: table;
-  width: 100%;
-}
-
 .row {
-  display: table-row;
+  display: grid;
+  grid-template-columns: 32px 300px 200px 300px 40px 40px;
+  align-items: center;
 }
 
 .row>* {
-  display: table-cell;
-  vertical-align: middle;
   padding: 10px;
 }
 
@@ -82,17 +77,12 @@
   border-radius: 0 5px 5px 0;
 }
 
-.iconWrapper {
-  text-align: center;
-}
-
 .add, .delete, .edit, .signOut {
   cursor: pointer;
 }
 
 .delete {
   fill: red;
-  margin-left: 2px;
 }
 
 .listHeader {
@@ -106,8 +96,6 @@
 }
 
 .edit {
-  margin-left: 10px;
-  margin-right: 10px;
   fill: green;
 }
 

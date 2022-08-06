@@ -11,6 +11,16 @@ type Props = {
 
 export function Contacts(x: Props) {
   const [showPopup, setShowPopup] = useState(true);
+  const [filter, setFilter] = useState('');
+  const filteredContacts = !filter
+    ? contacts
+    : contacts.filter(
+      ({ name, email, phone }) => {
+        const re = new RegExp(filter, 'i');
+        return re.test(name) || re.test(email) || re.test(phone);
+      }
+    );
+
   const openPopup = () => setShowPopup(true);
 
   return (
@@ -28,7 +38,14 @@ export function Contacts(x: Props) {
           <User width={30} />
         </div>
         <span className={s.userName}>Константин Констинтинопольский</span>
-        <Search />
+
+        <section className={s.search}>
+          <input type="text"
+                 className={s.searchInput}
+                 value={filter}
+                 onChange={e => setFilter(e.target.value)}></input>
+        </section>
+
         <DoorExit width={25}
                   className={s.signOut}
                   onClick={openPopup} />
@@ -38,9 +55,9 @@ export function Contacts(x: Props) {
 
         <div className={s.row}>
           <span className={s.listHeader}>№</span>
-          <span className={s.listHeader}>Имя</span>
-          <span className={s.listHeader}>Телефон</span>
-          <span className={s.listHeader}>Email</span>
+          <span className={cn(s.listHeader, s.name)}>Имя</span>
+          <span className={cn(s.listHeader, s.phone)}>Телефон</span>
+          <span className={cn(s.listHeader, s.emai)}>Email</span>
           <div className={s.iconWrapper}>
             <Delete width={25}
                     className={s.delete}
@@ -53,7 +70,7 @@ export function Contacts(x: Props) {
           </div>
         </div>
 
-        { contacts.map((c, i) => (
+        { filteredContacts.map((c, i) => (
           <div className={s.row} key={c.id}>
             <span className={s.number}>{ i + 1 }</span>
             <ContactItem contact={c} onEditClick={openPopup} />
@@ -86,13 +103,5 @@ function ContactItem(x: ContactItemProps) {
         <Edit width={20} className={s.edit} onClick={onEditClick} />
       </div>
     </>
-  );
-}
-
-function Search() {
-  return (
-    <section className={s.search}>
-      <input type="text" className={s.searchInput}></input>
-    </section>
   );
 }

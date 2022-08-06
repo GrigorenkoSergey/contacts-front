@@ -6,6 +6,10 @@
   --font-family-primary: Verdana, Arial, sans-serif;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 * {
   box-sizing: border-box;
 }
