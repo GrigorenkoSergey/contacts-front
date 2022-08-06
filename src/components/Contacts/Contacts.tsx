@@ -70,13 +70,21 @@ export function Contacts(x: Props) {
           </div>
         </div>
 
-        { filteredContacts.map((c, i) => (
-          <div className={s.row} key={c.id}>
-            <span className={s.number}>{ i + 1 }</span>
-            <ContactItem contact={c} onEditClick={openPopup} />
-          </div>
-        )) }
+        <div className={s.scrollingList}>
+          { filteredContacts.length === 0
+            ? (
+              <div className={s.row}>
+                <span>Нет контактов...</span>
+              </div>
+            )
+            : filteredContacts.map((c, i) => (
+              <div className={s.row} key={c.id}>
+                <span className={s.number}>{ i + 1 }</span>
+                <ContactItem contact={c} onEditClick={openPopup} />
+              </div>
+            )) }
 
+        </div>
       </div>
 
     </div>
