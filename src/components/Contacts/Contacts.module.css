@@ -157,3 +157,36 @@
 .scrollingList {
   overflow-y: scroll;
 }
+
+.popupContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.popupTitle {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.popupInput {
+  margin-bottom: 10px;
+}
+
+.popupNotes {
+  resize: none;
+}
+
+.popupInput,
+.popupNotes {
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+  padding: 5px;
+  font-family: var(--font-family-primary);
+}
+
+.popupInput:focus,
+.popupNotes:focus {
+  box-shadow: 0 0 5px gray;
+}

@@ -178,7 +178,17 @@ function EditContact(x: PopupProps) {
 function AddContact(x: PopupProps) {
   return (
     <Popup onAccept={x.onAccept} onCancel={x.onCancel} title="Добавление...">
-      Добавление
+      <div className={s.popupContent}>
+        { ['Имя', 'Телефон', 'Почта'].map((el, i) => (
+          <React.Fragment key={i}>
+            <span className={s.popupTitle}>{ el }</span>
+            <input type="text" className={s.popupInput} />
+          </React.Fragment>
+        )) }
+
+        <span className={s.popupTitle}>Заметки</span>
+        <textarea cols={30} rows={5} className={s.popupNotes}></textarea>
+      </div>
     </Popup>
   );
 }
