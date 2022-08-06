@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Delete, Edit, Add, User, DoorExit } from '../../assets/icons';
 import { cn } from '../../utils';
+import { Popup } from '../Popup';
 import { contacts } from './mocks';
 import s from './Contacts.module.css';
 
@@ -9,8 +10,18 @@ type Props = {
 };
 
 export function Contacts(x: Props) {
+  const [showPopup, setShowPopup] = useState(true);
+  const openPopup = () => setShowPopup(true);
+
   return (
     <div className={cn(s.contacts, x.className)}>
+      { showPopup && (
+        <Popup title="Добавление контакта"
+               onCancel={() => setShowPopup(false)}
+               onAccept={() => setShowPopup(false)}>
+          Popup
+        </Popup>
+      ) }
 
       <div className={s.header}>
         <div className={cn(s.iconWrapper, s.user)}>
@@ -18,7 +29,9 @@ export function Contacts(x: Props) {
         </div>
         <span className={s.userName}>Константин Констинтинопольский</span>
         <Search />
-        <DoorExit width={25} className={s.signOut} />
+        <DoorExit width={25}
+                  className={s.signOut}
+                  onClick={openPopup} />
       </div>
 
       <div className={s.list}>
@@ -29,17 +42,21 @@ export function Contacts(x: Props) {
           <span className={s.listHeader}>Телефон</span>
           <span className={s.listHeader}>Email</span>
           <div className={s.iconWrapper}>
-            <Delete width={25} className={s.delete} />
+            <Delete width={25}
+                    className={s.delete}
+                    onClick={openPopup} />
           </div>
           <div className={s.iconWrapper}>
-            <Add width={20} className={s.add} />
+            <Add width={20}
+                 className={s.add}
+                 onClick={openPopup} />
           </div>
         </div>
 
         { contacts.map((c, i) => (
           <div className={s.row} key={c.id}>
             <span className={s.number}>{ i + 1 }</span>
-            <ContactItem contact={c} />
+            <ContactItem contact={c} onEditClick={openPopup} />
           </div>
         )) }
 
@@ -51,10 +68,11 @@ export function Contacts(x: Props) {
 
 type ContactItemProps = {
   contact: typeof contacts[number]
+  onEditClick: () => void
 };
 
 function ContactItem(x: ContactItemProps) {
-  const { contact } = x;
+  const { contact, onEditClick } = x;
   return (
     <>
       <span className={s.name}>{ contact.name }</span>
@@ -65,7 +83,7 @@ function ContactItem(x: ContactItemProps) {
         <span className={s.checkbox}></span>
       </label>
       <div className={s.iconWrapper}>
-        <Edit width={20} className={s.edit} />
+        <Edit width={20} className={s.edit} onClick={onEditClick} />
       </div>
     </>
   );
