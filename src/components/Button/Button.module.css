@@ -29,6 +29,6 @@
 }
 
 .themePrimary:enabled:active, 
-.themePrimary_pressed {
+.themePrimaryPressed {
   background: #001162;
 }

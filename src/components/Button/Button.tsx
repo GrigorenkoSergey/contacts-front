@@ -17,7 +17,7 @@ export function Button(x: Props) {
             disabled={x.disabled}
             className={cn(
               s.button, s.themePrimary,
-              x.pressed && s.themePrimary_pressed,
+              x.pressed && s.themePrimaryPressed,
               x.className)}
             onClick={x.onClick}>
       { x.children }
