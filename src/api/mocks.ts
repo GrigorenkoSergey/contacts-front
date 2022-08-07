@@ -151,5 +151,7 @@ export const mockContacts = mockPeople.map((p, i) => ({
   email: character[randomInteger(0, character.length - 1)]
   + animals[randomInteger(0, animals.length - 1)]
   + '@'
-  + mails[randomInteger(0, mails.length - 1)]
+  + mails[randomInteger(0, mails.length - 1)],
+
+  notes: ''
 }));

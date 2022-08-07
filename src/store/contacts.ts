@@ -10,8 +10,15 @@ class Contacts {
   }
 
   getContacts() {
-    console.log('contact.getContacts');
     this.contacts = api.getContacts();
+  }
+
+  createContact(x: Omit<api.Contact, 'id'>) {
+    const id = api.createContact(x);
+    if (!id) return;
+
+    const indexToInsert = this.contacts.findIndex(v => v.name > x.name);
+    this.contacts.splice(indexToInsert, 0, { ...x, id });
   }
 
   selectContact(id: number) {

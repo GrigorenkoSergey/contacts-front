@@ -7,14 +7,15 @@ import s from './Popup.module.css';
 type Props = {
   children: React.ReactNode
   title: string
-  onAccept: () => void
+  okIsDisabled?: boolean
+  onAccept: (e: React.FormEvent<HTMLFormElement>) => void
   onCancel: () => void
 };
 
 // You should insert Popup before its siblings for proper blur.
 export function Popup(x: Props) {
-  const { title, children, onAccept, onCancel } = x;
-  const ref = useRef<HTMLDivElement>(null);
+  const { title, children, onAccept, onCancel, okIsDisabled } = x;
+  const ref = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     const onEscapePress = (e: KeyboardEvent) => {
@@ -40,9 +41,14 @@ export function Popup(x: Props) {
     };
   }, []);
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onAccept(e);
+  };
+
   return (
     <div className={s.substrate}>
-      <div className={s.popup} ref={ref} tabIndex={1}>
+      <form className={s.popup} ref={ref} tabIndex={1} onSubmit={handleSubmit}>
         <div className={s.header}>
           <h3 className={s.title}>{ title }</h3>
           <Close width={25}
@@ -55,10 +61,18 @@ export function Popup(x: Props) {
         </div>
 
         <div className={s.footer}>
-          <Button className={s.okBtn} onClick={onAccept}>OK</Button>
-          <Button className={s.cancelBtn} onClick={onCancel}>Отмена</Button>
+          <Button className={s.okBtn}
+                  type="submit"
+                  disabled={okIsDisabled}>
+            OK
+          </Button>
+
+          <Button className={s.cancelBtn}
+                  onClick={onCancel}>
+            Отмена
+          </Button>
         </div>
-      </div>
+      </form>
 
     </div>
   );
