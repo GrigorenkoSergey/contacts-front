@@ -141,7 +141,7 @@ const animals = ['dog', 'squirrel', 'raccoon', 'snake', 'cat'];
 const mails = ['gmail.com', 'yandex.ru'];
 
 export const mockContacts = mockPeople.map((p, i) => ({
-  id: i,
+  id: i + 1,
   name: p,
 
   phone: '8'

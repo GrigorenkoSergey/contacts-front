@@ -5,7 +5,7 @@ import s from './ContactList.module.css';
 
 type ContactsListProps = {
   list: typeof contacts.contacts[number][]
-  onEditClick: () => void
+  onEditClick: (id: number) => void
 };
 
 export const ContactsList = (x: ContactsListProps) => {
@@ -29,7 +29,7 @@ export const ContactsList = (x: ContactsListProps) => {
             <span className={s.number}>{ i + 1 }</span>
             <ContactItem contact={c}
                          onSelect={e => handleItemSelect(e, c.id)}
-                         onEditClick={onEditClick} />
+                         onEditClick={() => onEditClick(c.id)} />
           </div>
         )) }
     </div>

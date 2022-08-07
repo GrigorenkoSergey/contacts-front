@@ -4,6 +4,7 @@ import * as api from '../api';
 class Contacts {
   contacts: api.Contact[] = [];
   selectedIds = new Set<number>();
+  editingId = 0;
 
   constructor() {
     makeAutoObservable(this);

@@ -46,6 +46,11 @@ export const Contacts = observer((x: Props) => {
   const onCancel = () => setPopup(undefined);
   const onAccept = onCancel;
 
+  const handleEditClick = (id: number) => {
+    setPopup('edit');
+    contacts.editingId = id;
+  };
+
   return (
     <div className={cn(s.contacts, x.className)}>
       { popup && popupMapper({ onCancel, onAccept })[popup] }
@@ -92,7 +97,7 @@ export const Contacts = observer((x: Props) => {
         </div>
 
         <ContactsList list={filteredContacts}
-                      onEditClick={() => setPopup('edit')} />
+                      onEditClick={handleEditClick} />
       </div>
 
     </div>
