@@ -1,3 +1,7 @@
+.contacts, .contacts * {
+  --grid-template-columns: 32px 300px 200px 300px 40px 40px;
+}
+
 .contacts {
   border: 1px solid var(--primary-color);
   border-radius: 10px;
@@ -57,34 +61,14 @@
   margin-left: 20px;
 }
 
-.row {
+.titleRow {
   display: grid;
-  grid-template-columns: 32px 300px 200px 300px 40px 40px;
+  grid-template-columns: var(--grid-template-columns);
   align-items: center;
+  margin-right: 10px;
 }
 
-.row>* {
-  padding: 10px;
-}
-
-.row *:only-child {
-  grid-column: 2 / -1;
-}
-
-.row:nth-child(2n) {
-  background-color: aliceblue;
-  border-radius: 10px;
-}
-
-.row>:first-child {
-  border-radius: 5px 0 0 5px;
-}
-
-.row>:last-child {
-  border-radius: 0 5px 5px 0;
-}
-
-.add, .delete, .edit, .signOut {
+.add, .delete, .signOut {
   cursor: pointer;
 }
 
@@ -95,98 +79,15 @@
 .listHeader {
   font-weight: bold;
   min-height: 50px;
+  padding: 10px;
 }
 
-.checkboxContainer {
-  background: red;
-  max-width: 70%;
+.iconWrapper {
   justify-self: center;
-}
-
-.edit {
-  fill: green;
-}
-
-.checkboxLabel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.checkboxInput {
-  width: 0;
-  height: 0;
-  margin: 0;
-}
-
-.checkbox {
-  display: block;
-  border: 2px solid;
-  border-radius: 5px;
-  width: 20px;
-  height: 20px;
-  position: relative;
-  cursor: pointer;
-}
-
-.checkbox::before {
-  --border-color: blue;
-  visibility: hidden;
-  position: absolute;
-  bottom: 2px;
-  right: 50%;
-  content: '';
-  width: 9px;
-  height: 16px;
-  border-right: 2px solid var(--border-color);
-  border-bottom: 2px solid var(--border-color);
-  transform-origin: right bottom;
-  transform: rotate(55deg) skew(20deg);
-}
-
-.checkboxInput:checked+.checkbox::before {
-  visibility: visible;
 }
 
 .list {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-}
-
-.scrollingList {
-  overflow-y: scroll;
-}
-
-.popupContent {
-  display: flex;
-  flex-direction: column;
-}
-
-.popupTitle {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.popupInput {
-  margin-bottom: 10px;
-}
-
-.popupNotes {
-  resize: none;
-}
-
-.popupInput,
-.popupNotes {
-  border: 1px solid var(--primary-color);
-  border-radius: 5px;
-  font-size: 14px;
-  outline: none;
-  padding: 5px;
-  font-family: var(--font-family-primary);
-}
-
-.popupInput:focus,
-.popupNotes:focus {
-  box-shadow: 0 0 5px gray;
 }

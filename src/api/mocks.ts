@@ -1,4 +1,4 @@
-import { randomInteger } from '../../utils';
+import { randomInteger } from '../utils';
 
 const mockPeople = [
   'Абакаров Хизри',
@@ -140,7 +140,7 @@ const character = ['crazy', 'furious', 'sad', 'happy', 'lucky', 'snoopy'];
 const animals = ['dog', 'squirrel', 'raccoon', 'snake', 'cat'];
 const mails = ['gmail.com', 'yandex.ru'];
 
-export const contacts = mockPeople.map((p, i) => ({
+export const mockContacts = mockPeople.map((p, i) => ({
   id: i,
   name: p,
 
