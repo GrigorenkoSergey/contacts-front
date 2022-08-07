@@ -1,19 +1,31 @@
 import React from 'react';
 import { contacts } from '../../../../store';
-import { ContactItem } from '..';
+import { ContactItem } from '../ContactItem';
 import s from './ContactList.module.css';
 
-type ContactsListProps = {
+type Popup = 'edit' | 'info';
+
+type Props = {
   list: typeof contacts.contacts[number][]
-  onEditClick: (id: number) => void
+  setPopup: (w: Popup) => void
 };
 
-export const ContactsList = (x: ContactsListProps) => {
-  const { list, onEditClick } = x;
+export const ContactsList = (x: Props) => {
+  const { list, setPopup } = x;
 
   const handleItemSelect = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
     if (e.target.checked) contacts.selectContact(id);
     else contacts.removeFromSelection(id);
+  };
+
+  const handleNameDoubleClick = (id: number) => {
+    contacts.selectedId = id;
+    setPopup('info');
+  };
+
+  const handleEditClick = (id: number) => {
+    contacts.selectedId = id;
+    setPopup('edit');
   };
 
   return (
@@ -28,8 +40,9 @@ export const ContactsList = (x: ContactsListProps) => {
           <div className={s.row} key={c.id}>
             <span className={s.number}>{ i + 1 }</span>
             <ContactItem contact={c}
-                         onSelect={e => handleItemSelect(e, c.id)}
-                         onEditClick={() => onEditClick(c.id)} />
+                         onNameDoubleClick={() => handleNameDoubleClick(c.id)}
+                         onEditClick={() => handleEditClick(c.id)}
+                         onSelect={e => handleItemSelect(e, c.id)} />
           </div>
         )) }
     </div>

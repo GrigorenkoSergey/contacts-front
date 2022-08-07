@@ -16,3 +16,11 @@ export const createContact = (contact: Omit<Contact, 'id'>) => {
 export const removeContacts = (idList: number[]) => {
   return true;
 };
+
+export const updateContact = (x: Contact) => {
+  const contact = mockContacts.find(c => x.id === c.id);
+  if (!contact) return false;
+
+  Object.assign(contact, x);
+  return true;
+};

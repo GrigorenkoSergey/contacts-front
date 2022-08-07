@@ -10,11 +10,12 @@ type Props = {
   okIsDisabled?: boolean
   onAccept: (e: React.FormEvent<HTMLFormElement>) => void
   onCancel: () => void
+  hideControls?: boolean
 };
 
 // You should insert Popup before its siblings for proper blur.
 export function Popup(x: Props) {
-  const { title, children, onAccept, onCancel, okIsDisabled } = x;
+  const { title, children, onAccept, onCancel, okIsDisabled, hideControls } = x;
   const ref = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
@@ -60,18 +61,20 @@ export function Popup(x: Props) {
           { children }
         </div>
 
-        <div className={s.footer}>
-          <Button className={s.okBtn}
-                  type="submit"
-                  disabled={okIsDisabled}>
-            OK
-          </Button>
+        { !hideControls && (
+          <div className={s.footer}>
+            <Button className={s.okBtn}
+                    type="submit"
+                    disabled={okIsDisabled}>
+              OK
+            </Button>
 
-          <Button className={s.cancelBtn}
-                  onClick={onCancel}>
-            Отмена
-          </Button>
-        </div>
+            <Button className={s.cancelBtn}
+                    onClick={onCancel}>
+              Отмена
+            </Button>
+          </div>
+        ) }
       </form>
 
     </div>

@@ -6,12 +6,12 @@ import { cn } from '../../utils';
 import { Popup } from '../Popup';
 import {
   RemoveContactsPopup, ConfirmExitPopup,
-  EditContactPopup, AddContactPopup, ContactsList,
+  EditContactPopup, ContactInfoPopup, ContactsList, AddContactPopup,
 } from './components';
 
 import s from './Contacts.module.css';
 
-type Popup = 'exit' | 'edit' | 'delete' | 'add';
+type Popup = 'exit' | 'edit' | 'delete' | 'add' | 'info';
 
 type PopupProps = {
   onAccept: () => void
@@ -21,7 +21,8 @@ const popupMapper: (x: PopupProps) => Record<Popup, JSX.Element> = x => ({
   add: <AddContactPopup {...x} />,
   delete: <RemoveContactsPopup {...x} />,
   edit: <EditContactPopup {...x} />,
-  exit: <ConfirmExitPopup {...x} />
+  exit: <ConfirmExitPopup {...x} />,
+  info: <ContactInfoPopup {...x} />,
 });
 
 type Props = {
@@ -45,11 +46,6 @@ export const Contacts = observer((x: Props) => {
 
   const onCancel = () => setPopup(undefined);
   const onAccept = onCancel;
-
-  const handleEditClick = (id: number) => {
-    setPopup('edit');
-    contacts.editingId = id;
-  };
 
   return (
     <div className={cn(s.contacts, x.className)}>
@@ -82,7 +78,7 @@ export const Contacts = observer((x: Props) => {
           <span className={cn(s.listHeader, s.emai)}>Email</span>
 
           <div className={s.iconWrapper}>
-            { contacts.selectedIds.size > 0 && (
+            { contacts.idsToRemove.size > 0 && (
               <Delete width={25}
                       className={s.delete}
                       onClick={() => setPopup('delete')} />
@@ -97,7 +93,7 @@ export const Contacts = observer((x: Props) => {
         </div>
 
         <ContactsList list={filteredContacts}
-                      onEditClick={handleEditClick} />
+                      setPopup={setPopup} />
       </div>
 
     </div>

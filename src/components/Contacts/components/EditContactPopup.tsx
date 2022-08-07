@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { contacts } from '../../../../store';
-import { Popup } from '../../..';
-import s from './EditContactPopup.module.css';
+import { contacts } from '../../../store';
+import { Popup } from '../..';
+import s from './ContactPopup.module.css';
 
 type Props = {
   onAccept: () => void
@@ -12,12 +12,12 @@ const fields = ['name', 'phone', 'email', 'notes'] as const;
 const inputTypeMapper = { name: 'text', email: 'email', phone: 'number', notes: 'text' };
 
 export const EditContactPopup = (x: Props) => {
-  const currentItem = contacts.contacts.find(i => i.id === contacts.editingId);
+  const currentItem = contacts.contacts.find(i => i.id === contacts.selectedId);
 
-  const [name, setName] = useState(currentItem?.name);
-  const [email, setEmail] = useState(currentItem?.email);
-  const [phone, setPhone] = useState(currentItem?.phone);
-  const [notes, setNotes] = useState(currentItem?.notes);
+  const [name, setName] = useState(currentItem?.name ?? '');
+  const [email, setEmail] = useState(currentItem?.email ?? '');
+  const [phone, setPhone] = useState(currentItem?.phone ?? '');
+  const [notes, setNotes] = useState(currentItem?.notes ?? '');
   const [error, setError] = useState('');
 
   if (!currentItem) return null;
@@ -34,6 +34,7 @@ export const EditContactPopup = (x: Props) => {
     );
 
     if (existingContact) return setError('Изменения совпадают с уже существующим контактом!');
+    contacts.updateContact({ email, id: currentItem.id, name, notes, phone });
 
     x.onAccept();
   };
@@ -79,7 +80,10 @@ export const EditContactPopup = (x: Props) => {
           )) }
 
           <span className={s.title}>Заметки</span>
-          <textarea name="notes" cols={30} rows={5} className={s.notes}></textarea>
+          <textarea name="notes" cols={30} rows={5}
+                    className={s.notes}
+                    value={notes}
+                    onChange={e => setNotes(e.target.value)}></textarea>
         </div>
       ) }
     </Popup>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Popup } from '../../..';
-import { contacts } from '../../../../store';
-import s from './AddContactPopup.module.css';
+import { Popup } from '../..';
+import { contacts } from '../../../store';
+import s from './ContactPopup.module.css';
 
 type Props = {
   onAccept: () => void
@@ -35,7 +35,10 @@ export const AddContactPopup = (x: Props) => {
 
   const valueMapper = { name, email, phone, notes };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, field: typeof fields[number]) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    field: typeof fields[number]
+  ) => {
     const value = e.target.value;
 
     const setMapper: {[key in typeof fields[number]]: (v: string) => void} = {
@@ -71,7 +74,10 @@ export const AddContactPopup = (x: Props) => {
           )) }
 
           <span className={s.title}>Заметки</span>
-          <textarea name="notes" cols={30} rows={5} className={s.notes}></textarea>
+          <textarea name="notes" cols={30} rows={5}
+                    className={s.notes}
+                    value={valueMapper.notes}
+                    onChange={e => handleChange(e, 'notes')}></textarea>
         </div>
       ) }
 

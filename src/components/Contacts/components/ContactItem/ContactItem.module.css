@@ -4,6 +4,10 @@
   justify-self: center;
 }
 
+.name {
+  cursor: pointer;
+}
+
 .checkboxLabel {
   display: flex;
   align-items: center;

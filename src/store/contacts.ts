@@ -3,8 +3,8 @@ import * as api from '../api';
 
 class Contacts {
   contacts: api.Contact[] = [];
-  selectedIds = new Set<number>();
-  editingId = 0;
+  idsToRemove = new Set<number>();
+  selectedId = 0;
 
   constructor() {
     makeAutoObservable(this);
@@ -22,19 +22,26 @@ class Contacts {
     this.contacts.splice(indexToInsert, 0, { ...x, id });
   }
 
+  updateContact(x: api.Contact) {
+    if (!api.updateContact(x)) return;
+
+    const contact = this.contacts.find(c => c.id === x.id);
+    if (contact) Object.assign(contact, x);
+  }
+
   selectContact(id: number) {
-    this.selectedIds.add(id);
+    this.idsToRemove.add(id);
   }
 
   removeFromSelection(id: number) {
-    this.selectedIds.delete(id);
+    this.idsToRemove.delete(id);
   }
 
   removeContacts() {
-    if (!api.removeContacts(Array.from(this.selectedIds))) return;
+    if (!api.removeContacts(Array.from(this.idsToRemove))) return;
 
-    this.contacts = this.contacts.filter(c => !this.selectedIds.has(c.id));
-    this.selectedIds.clear();
+    this.contacts = this.contacts.filter(c => !this.idsToRemove.has(c.id));
+    this.idsToRemove.clear();
   }
 }
 
