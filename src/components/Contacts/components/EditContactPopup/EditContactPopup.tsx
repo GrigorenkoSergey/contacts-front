@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Popup } from '../../..';
 import { contacts } from '../../../../store';
-import s from './AddContactPopup.module.css';
+import { Popup } from '../../..';
+import s from './EditContactPopup.module.css';
 
 type Props = {
   onAccept: () => void
@@ -11,29 +11,32 @@ type Props = {
 const fields = ['name', 'phone', 'email', 'notes'] as const;
 const inputTypeMapper = { name: 'text', email: 'email', phone: 'number', notes: 'text' };
 
-export const AddContactPopup = (x: Props) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [notes, setNotes] = useState('');
+export const EditContactPopup = (x: Props) => {
+  const currentItem = contacts.contacts.find(i => i.id === contacts.editingId);
+
+  const [name, setName] = useState(currentItem?.name);
+  const [email, setEmail] = useState(currentItem?.email);
+  const [phone, setPhone] = useState(currentItem?.phone);
+  const [notes, setNotes] = useState(currentItem?.notes);
   const [error, setError] = useState('');
+
+  if (!currentItem) return null;
+
+  const valueMapper = { name, email, phone, notes };
 
   const handleAcceptClick = (e: React.FormEvent<HTMLFormElement>) => {
     if (error) return setError('');
 
     const existingContact = contacts.contacts.find(c =>
-      c.name === name && (
-        (email ? c.email === email : false)
-         || (phone ? c.phone === phone : false)
-      ));
+      c.name === name
+      && c.id !== currentItem.id
+      && (c.email === email || c.phone === phone)
+    );
 
-    if (existingContact) return setError('Текущий контакт уже существует!');
+    if (existingContact) return setError('Изменения совпадают с уже существующим контактом!');
 
-    contacts.createContact({ name, email, phone, notes });
     x.onAccept();
   };
-
-  const valueMapper = { name, email, phone, notes };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, field: typeof fields[number]) => {
     const value = e.target.value;
@@ -47,12 +50,17 @@ export const AddContactPopup = (x: Props) => {
     setMapper[field](value);
   };
 
-  const okIsEnabled = name && (email || phone);
+  const okIsEnabled = name && (email || phone) && (
+    name !== currentItem.name
+    || email !== currentItem.email
+    || phone !== currentItem.phone
+    || notes !== currentItem.notes
+  );
 
   return (
-    <Popup title="Добавление..."
-           onAccept={handleAcceptClick}
+    <Popup title="Редактирование..."
            okIsDisabled={!okIsEnabled}
+           onAccept={handleAcceptClick}
            onCancel={x.onCancel}>
       { error && error }
 
@@ -74,7 +82,6 @@ export const AddContactPopup = (x: Props) => {
           <textarea name="notes" cols={30} rows={5} className={s.notes}></textarea>
         </div>
       ) }
-
     </Popup>
   );
 };

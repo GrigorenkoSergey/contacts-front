@@ -1,0 +1,44 @@
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input {
+  margin-bottom: 10px;
+}
+
+.notes {
+  resize: none;
+}
+
+.input,
+.notes {
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+  padding: 5px;
+  font-family: var(--font-family-primary);
+}
+
+.input:focus,
+.notes:focus {
+  box-shadow: 0 0 5px gray;
+}
+
+/* disable arrows for input type="number" */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

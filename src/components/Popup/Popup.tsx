@@ -42,8 +42,8 @@ export function Popup(x: Props) {
   }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
     onAccept(e);
+    e.preventDefault();
   };
 
   return (
