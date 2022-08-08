@@ -71,25 +71,23 @@ export const Contacts = observer((x: Props) => {
 
       <div className={s.list}>
 
-        <div className={s.titleRow}>
-          <span className={s.listHeader}>№</span>
-          <span className={cn(s.listHeader, s.name)}>Имя</span>
-          <span className={cn(s.listHeader, s.phone)}>Телефон</span>
-          <span className={cn(s.listHeader, s.emai)}>Email</span>
+        <span className={s.listHeader}>№</span>
+        <span className={cn(s.listHeader, s.name)}>Имя</span>
+        <span className={cn(s.listHeader, s.phone)}>Телефон</span>
+        <span className={cn(s.listHeader, s.emai)}>Email</span>
 
-          <div className={s.iconWrapper}>
-            { contacts.idsToRemove.size > 0 && (
-              <Delete width={25}
-                      className={s.delete}
-                      onClick={() => setPopup('delete')} />
-            ) }
-          </div>
+        <div className={cn(s.listHeader, s.iconWrapper)}>
+          { contacts.idsToRemove.size > 0 && (
+            <Delete width={25}
+                    className={s.delete}
+                    onClick={() => setPopup('delete')} />
+          ) }
+        </div>
 
-          <div className={s.iconWrapper}>
-            <Add width={20}
-                 className={s.add}
-                 onClick={() => setPopup('add')} />
-          </div>
+        <div className={cn(s.listHeader, s.iconWrapper)}>
+          <Add width={20}
+               className={s.add}
+               onClick={() => setPopup('add')} />
         </div>
 
         <ContactsList list={filteredContacts}

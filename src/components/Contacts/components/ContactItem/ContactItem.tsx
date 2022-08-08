@@ -31,7 +31,7 @@ export const ContactItem = (x: Props) => {
       </label>
 
       <div className={s.iconWrapper}>
-        <Edit width={20} className={s.edit} onClick={() => onEditClick(id)} />
+        <Edit className={s.edit} onClick={() => onEditClick(id)} />
       </div>
     </>
   );
