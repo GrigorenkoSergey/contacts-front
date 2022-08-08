@@ -13,7 +13,7 @@ type Props = {
 
 export function Button(x: Props) {
   return (
-    <button type={x.type ?? 'submit'}
+    <button type={x.type ?? 'button'}
             disabled={x.disabled}
             className={cn(
               s.button, s.themePrimary,

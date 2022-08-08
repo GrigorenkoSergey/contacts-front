@@ -24,6 +24,7 @@ export function Popup(x: Props) {
     container.current?.classList.add(s.fadeIn);
     setTimeout(onCancel, HIDING_ANIMATION_TIME);
   };
+
   useEffect(() => {
     const onEscapePress = (e: KeyboardEvent) => {
       if (e.key === 'Escape') handleCancel();

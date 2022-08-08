@@ -83,7 +83,6 @@ export const ContactPopup = (x: Props) => {
             <React.Fragment key={i}>
               <span className={s.title}>{ el }</span>
               <input className={s.input}
-                     required={fields[i] === 'name'}
                      name={fields[i]}
                      type={inputTypeMapper[fields[i]]}
                      defaultValue={currentInfo[fields[i]]}
