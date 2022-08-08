@@ -14,8 +14,8 @@ export const ContactsList = (x: Props) => {
   const { list, setPopup } = x;
 
   const handleItemSelect = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
-    if (e.target.checked) contacts.selectContact(id);
-    else contacts.removeFromSelection(id);
+    if (e.target.checked) contacts.addToRemoval(id);
+    else contacts.removeFromRemoval(id);
   };
 
   const handleNameDoubleClick = (id: number) => {
@@ -41,7 +41,7 @@ export const ContactsList = (x: Props) => {
             <span className={s.number}>{ i + 1 }</span>
             <ContactItem contact={c}
                          onNameDoubleClick={() => handleNameDoubleClick(c.id)}
-                         onEditClick={() => handleEditClick(c.id)}
+                         onEditClick={handleEditClick}
                          onSelect={e => handleItemSelect(e, c.id)} />
           </div>
         )) }

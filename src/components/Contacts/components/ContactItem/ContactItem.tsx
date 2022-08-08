@@ -1,17 +1,18 @@
 import React from 'react';
-import { contacts } from '../../../../store';
 import { Edit } from '../../../../assets/icons';
+import { contacts } from '../../../../store';
 import s from './ContactItem.module.css';
 
 type Props = {
   contact: typeof contacts.contacts[number]
-  onEditClick: () => void
+  onEditClick: (id: number) => void
   onNameDoubleClick: () => void
   onSelect: (e: React.ChangeEvent<HTMLInputElement>) => void
 };
 
 export const ContactItem = (x: Props) => {
   const { contact, onNameDoubleClick, onEditClick, onSelect } = x;
+  const { id } = contact;
 
   return (
     <>
@@ -30,7 +31,7 @@ export const ContactItem = (x: Props) => {
       </label>
 
       <div className={s.iconWrapper}>
-        <Edit width={20} className={s.edit} onClick={onEditClick} />
+        <Edit width={20} className={s.edit} onClick={() => onEditClick(id)} />
       </div>
     </>
   );

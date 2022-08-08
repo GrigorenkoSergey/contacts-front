@@ -6,7 +6,7 @@ import { cn } from '../../utils';
 import { Popup } from '../Popup';
 import {
   RemoveContactsPopup, ConfirmExitPopup,
-  EditContactPopup, ContactInfoPopup, ContactsList, AddContactPopup,
+  ContactsList, ContactPopup,
 } from './components';
 
 import s from './Contacts.module.css';
@@ -18,11 +18,11 @@ type PopupProps = {
   onCancel: () => void
 };
 const popupMapper: (x: PopupProps) => Record<Popup, JSX.Element> = x => ({
-  add: <AddContactPopup {...x} />,
+  add: <ContactPopup {...x} type="add" />,
+  edit: <ContactPopup {...x} type="edit" />,
+  info: <ContactPopup {...x} type="info" />,
   delete: <RemoveContactsPopup {...x} />,
-  edit: <EditContactPopup {...x} />,
   exit: <ConfirmExitPopup {...x} />,
-  info: <ContactInfoPopup {...x} />,
 });
 
 type Props = {
