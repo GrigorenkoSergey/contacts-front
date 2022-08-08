@@ -12,27 +12,34 @@ type Props = {
   onCancel: () => void
 };
 
+const HIDING_ANIMATION_TIME = 300; // should equals than in css
+
 // You should insert Popup before its siblings for proper blur.
 export function Popup(x: Props) {
   const { title, children, onAccept, onCancel, okIsDisabled } = x;
-  const ref = useRef<HTMLFormElement>(null);
+  const form = useRef<HTMLFormElement>(null);
+  const container = useRef<HTMLDivElement>(null);
 
+  const handleCancel = () => {
+    container.current?.classList.add(s.fadeIn);
+    setTimeout(onCancel, HIDING_ANIMATION_TIME);
+  };
   useEffect(() => {
     const onEscapePress = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onCancel();
+      if (e.key === 'Escape') handleCancel();
     };
 
     const catchFocus = (e: FocusEvent) => {
-      if (!ref.current) return;
+      if (!form.current) return;
       if (!(e.target instanceof Node)) return;
-      if (!ref.current.contains(e.target)) ref.current.focus();
+      if (!form.current.contains(e.target)) form.current.focus();
     };
 
     document.addEventListener('keydown', onEscapePress);
     document.addEventListener('focusin', catchFocus);
 
-    if (ref.current) {
-      ref.current.focus();
+    if (form.current) {
+      form.current.focus();
     }
 
     return () => {
@@ -47,13 +54,13 @@ export function Popup(x: Props) {
   };
 
   return (
-    <div className={s.substrate}>
-      <form className={s.popup} ref={ref} tabIndex={1} onSubmit={handleSubmit}>
+    <div className={s.substrate} ref={container}>
+      <form className={s.popup} ref={form} tabIndex={1} onSubmit={handleSubmit}>
         <div className={s.header}>
           <h3 className={s.title}>{ title }</h3>
           <Close width={25}
                  className={s.closeBtn}
-                 onClick={onCancel} />
+                 onClick={handleCancel} />
         </div>
 
         <div className={s.content}>
@@ -68,7 +75,7 @@ export function Popup(x: Props) {
           </Button>
 
           <Button className={s.cancelBtn}
-                  onClick={onCancel}>
+                  onClick={handleCancel}>
             Отмена
           </Button>
         </div>

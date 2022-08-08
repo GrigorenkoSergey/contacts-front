@@ -1,27 +1,45 @@
-.substrate {
+.substrate :local {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 9999;
-  background-color: rgba(0, 172, 239, 0.11);
   display: flex;
   align-items: center;
   justify-content: center;
+
+  animation: background-on 1 forwards;
+  animation-duration: var(--popup-spring);
 }
 
-.substrate~* {
-  filter: blur(5px);
+.fadeIn {
+  animation: background-off 1 forwards;
+  animation-duration: var(--popup-fade-in);
 }
 
-.popup {
+.substrate~* :local {
+  animation: blur 1 forwards;
+  animation-duration: var(--popup-spring);
+}
+
+.fadeIn~*:local {
+  animation: unblur 1 forwards;
+  animation-duration: var(--popup-fade-in);
+}
+
+.popup :local {
+  animation: spring 1 var(--popup-spring);
   border: 1px solid var(--primary-color);
   box-shadow: 0 0 5px 5px gray;
   border-radius: 10px;
   padding: 10px;
   background-color: #fff;
   outline: none;
+}
+
+.fadeIn .popup :local {
+  animation: hide var(--popup-fade-in) forwards;
 }
 
 .header {
@@ -51,4 +69,64 @@
   gap: 10px;
   padding: 0 10px;
   margin-top: 20px;
+}
+
+@keyframes spring {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes hide {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes blur {
+  0% {
+    filter: blur(0);
+  }
+
+  100% {
+    filter: blur(5px);
+  }
+}
+
+@keyframes unblur {
+  0% {
+    filter: blur(5px);
+  }
+
+  100% {
+    filter: blur(0);
+  }
+}
+
+@keyframes background-on {
+  from {
+    background-color: inherit;
+  }
+
+  to {
+    background-color: rgba(0, 172, 239, 0.11);
+  }
+}
+
+@keyframes background-off {
+  from {
+    background-color: rgba(0, 172, 239, 0.11);
+  }
+
+  to {
+    background-color: inherit;
+  }
 }

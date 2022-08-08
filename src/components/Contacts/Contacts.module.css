@@ -83,11 +83,6 @@ svg {
   align-items: center;
 }
 
-.list:nth-child(2n + 1) {
-  background-color: aliceblue;
-  border-radius: 10px;
-}
-
 .list>:nth-child(12n - 5),
 .list>:nth-child(12n - 4),
 .list>:nth-child(12n - 3),
