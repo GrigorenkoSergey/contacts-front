@@ -52,7 +52,7 @@ export const Contacts = observer((x: Props) => {
       { popup && popupMapper({ onCancel, onAccept })[popup] }
 
       <div className={s.header}>
-        <div className={cn(s.iconWrapper, s.user)}>
+        <div className={cn(s.iconWrapper, s.userIcon)}>
           <User width={30} />
         </div>
         <span className={s.userName}>Константин Констинтинопольский</span>
@@ -64,12 +64,12 @@ export const Contacts = observer((x: Props) => {
                  onChange={e => setFilter(e.target.value)}></input>
         </section>
 
-        <DoorExit width={25}
+        <DoorExit width={30}
                   className={s.signOut}
                   onClick={() => setPopup('exit')} />
       </div>
 
-      <div className={s.list}>
+      { /* <div className={s.list}>
 
         <span className={s.listHeader}>№</span>
         <span className={cn(s.listHeader, s.name)}>Имя</span>
@@ -92,7 +92,7 @@ export const Contacts = observer((x: Props) => {
 
         <ContactsList list={filteredContacts}
                       setPopup={setPopup} />
-      </div>
+      </div> */ }
 
     </div>
   );

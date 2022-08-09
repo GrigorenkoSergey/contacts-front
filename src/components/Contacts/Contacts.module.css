@@ -1,44 +1,105 @@
 .contacts, .contacts * {
-  --grid-template-columns: 32px minmax(auto, 300px) minmax(auto, 200px) minmax(auto, 300px) 40px 40px;
+  --grid-template-columns:
+    32px minmax(auto, 300px) minmax(auto, 200px) minmax(auto, 300px) 40px 40px;
 }
 
 .contacts {
   border: 1px solid var(--primary-color);
   border-radius: 10px;
-  padding: 20px;
   box-shadow: 0 0 6px gray;
   display: flex;
   flex-direction: column;
   overflow: auto;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid var(--primary-color);
-  margin-bottom: 10px;
+@media (min-width: 400px) {}
+
+@media (min-width: 700px) {
+  .contacts {
+    padding: 20px;
+  }
 }
 
-.user {
+.header {
+  border-bottom: 1px solid var(--primary-color);
+
+  display: grid;
+  grid-template-areas:
+    "icon   name   name"
+    "exit search search";
+  grid-template-columns: auto 1fr auto;
+  gap: 15px 5px;
+  padding: 5px;
+}
+
+@media (min-width: 400px) {
+  .header {
+    display: grid;
+    grid-template-areas:
+      "icon name   name"
+      "icon search exit";
+    padding: 10px;
+  }
+}
+
+@media (min-width: 700px) {
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+}
+
+.userIcon {
+  grid-area: icon;
+  margin-right: 10px;
   width: 40px;
   height: 40px;
   background-color: silver;
   border-radius: 50%;
-  margin-right: 20px;
+
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+@media (min-width: 400px) {
+  .userIcon {
+    align-self: center;
+  }
+}
+
 .userName {
-  flex-grow: 1;
-  font-size: 18px;
+  grid-area: name;
+  align-self: center;
 }
 
 .search {
-  justify-self: flex-end;
-  margin-left: 10px;
+  grid-area: search;
+}
+
+@media (min-width: 400px) {
+  .search {
+    justify-self: end;
+  }
+}
+
+@media (min-width: 700px) {
+  .search {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+.signOut {
+  grid-area: exit;
+  cursor: pointer;
+}
+
+@media (min-width: 700px) {
+  .signOut {
+    margin-left: auto;
+  }
 }
 
 .searchInput {
@@ -55,10 +116,6 @@
 
 .searchInput:focus {
   box-shadow: 0 0 5px gray;
-}
-
-.signOut {
-  margin-left: 20px;
 }
 
 svg {
