@@ -1,5 +1,5 @@
 import React from 'react';
-import { Edit } from '../../../../assets/icons';
+import { Delete, Edit } from '../../../../assets/icons';
 import { contacts } from '../../../../store';
 import { Checkbox } from '../../../Checkbox';
 import s from './ContactList.module.scss';
@@ -9,10 +9,12 @@ type Props = {
   onEditClick: (id: number) => void
   onNameDoubleClick: () => void
   onSelect: (e: React.ChangeEvent<HTMLInputElement>) => void
+  isChecked?: boolean
+  onRemoveClick: (id?: number) => void
 };
 
 export const ContactItem = (x: Props) => {
-  const { contact, onNameDoubleClick, onEditClick, onSelect } = x;
+  const { contact, onNameDoubleClick, onEditClick, onSelect, isChecked, onRemoveClick } = x;
   const { id } = contact;
 
   return (
@@ -32,13 +34,23 @@ export const ContactItem = (x: Props) => {
         <span className={s.emailValue}>{ contact.email }</span>
       </div>
 
-      <Checkbox className={s.select} onChange={onSelect} />
+      <div className={s.select}>
+        <Checkbox className={s.select}
+                  onChange={onSelect}
+                  checked={isChecked} />
+      </div>
 
       <div className={s.edit}>
         <Edit width={25}
               onClick={() => onEditClick(id)} />
       </div>
-      <span className={s.emptyCell}></span>
+      <span className={s.itemDelete}>
+        { isChecked && (
+          <Delete width={25}
+                  className={s.itemDeleteIcon}
+                  onClick={() => onRemoveClick()} />
+        ) }
+      </span>
     </>
   );
 };

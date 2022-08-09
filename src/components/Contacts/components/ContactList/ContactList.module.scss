@@ -33,6 +33,7 @@ $min-row-height: 35px;
   margin: 10px 0;
   grid-template-columns: minmax(230px, auto) 40px;
   grid-auto-flow: dense;
+  position: relative;
 
   @media (min-width: 700px) {
     grid-template-columns: $grid-template-columns-2;
@@ -43,10 +44,7 @@ $min-row-height: 35px;
     align-items: center;
     padding: 5px;
     user-select: none;
-
-    @media (min-widht: 400px) {
-      min-height: $min-row-height;
-    }
+    min-height: $min-row-height;
   }
 
   @for $i from 7 through 1 {
@@ -56,24 +54,32 @@ $min-row-height: 35px;
   }
 
   &Header {
-    font-weight: bold;
-    min-height: 40px;
-    position: sticky;
-    top: 0;
-    background-color: #fff;
-    border-bottom: 1px solid var(--primary-color);
-    z-index: 5;
-    margin-bottom: 5px;
     display: none;
 
     @media (min-width: 700px) {
       display: block;
+      font-weight: bold;
+      min-height: 40px;
+      position: sticky;
+      top: 0;
+      background-color: #fff;
+      border-bottom: 1px solid var(--primary-color);
+      z-index: 5;
+      margin-bottom: 5px;
     }
   }
 }
 
-.iconWrapper {
-  justify-content: center;
+.delete {
+  @media (min-width: 700px) {
+    display: flex;
+    justify-content: center;
+  }
+
+  &Icon {
+    fill: red;
+    transform: translateY(-2px);
+  }
 }
 
 .number {
@@ -90,7 +96,6 @@ $min-row-height: 35px;
 .name {
   display: flex;
   align-items: center;
-  cursor: pointer;
   border-top-left-radius: $border-radius;
   grid-column: 1;
 
@@ -100,11 +105,19 @@ $min-row-height: 35px;
     grid-column: 2;
     border-top-left-radius: 0;
   }
+
+  &Value {
+    cursor: pointer;
+  }
 }
 
 .select {
   border-top-right-radius: $border-radius;
   grid-column: 2;
+
+  display: flex;
+  justify-content: center;
+  position: relative;
 
   @media (min-width: 700px) {
     grid-column: 5;
@@ -134,12 +147,24 @@ $min-row-height: 35px;
   }
 }
 
-.emptyCell {
+.itemDelete {
   grid-column: 2;
   border-bottom-right-radius: $border-radius;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   @media (min-width: 700px) {
     display: none;
+  }
+
+  &Icon {
+    fill: red;
+    transform: translateY(-2px) translateX(2px);
+
+    @media (min-width: 700px) {
+      display: none;
+    }
   }
 }
 
@@ -172,6 +197,7 @@ svg {
   cursor: pointer;
 }
 
-.delete {
-  fill: red;
+.list .emptyContacts {
+  grid-column: 1 / -1;
+  background-color: white;
 }

@@ -76,6 +76,12 @@ class Contacts {
     this.contacts = this.contacts.filter(c => !this.idsToRemove.has(c.id));
     this.idsToRemove.clear();
   }
+
+  removeSingle(id: number) {
+    if (!api.removeContacts([id])) return;
+    this.contacts = this.contacts.filter(c => id !== c.id);
+    this.idsToRemove.delete(id);
+  }
 }
 
 const contacts = new Contacts();

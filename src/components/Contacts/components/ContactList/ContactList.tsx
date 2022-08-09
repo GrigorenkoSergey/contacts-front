@@ -39,10 +39,10 @@ export const ContactList = observer((x: Props) => {
       <span className={s.listHeader}>Телефон</span>
       <span className={s.listHeader}>Email</span>
 
-      <div className={cn(s.listHeader, s.iconWrapper)}>
-        { contacts.idsToRemove.size > 0 && (
+      <div className={cn(s.listHeader, s.delete)}>
+        { contacts.idsToRemove.size > 0 && ( // FIXME вынести в отдельный компонент для ускорения
           <Delete width={25}
-                  className={s.delete}
+                  className={s.deleteIcon}
                   onClick={() => setPopup('delete')} />
         ) }
       </div>
@@ -53,10 +53,13 @@ export const ContactList = observer((x: Props) => {
              onClick={() => setPopup('add')} />
       </div>
       <>
-        { list.map((c, i) => (
+        { !list.length && <span className={s.emptyContacts}>Нет контактов...</span> }
+        { list.length > 0 && list.map((c, i) => (
           <React.Fragment key={c.id}>
             <span className={s.number}>{ i + 1 }</span>
             <ContactItem contact={c}
+                         isChecked={contacts.idsToRemove.has(c.id)}
+                         onRemoveClick={() => contacts.removeSingle(c.id)}
                          onNameDoubleClick={() => handleNameDoubleClick(c.id)}
                          onEditClick={handleEditClick}
                          onSelect={e => handleItemSelect(e, c.id)} />

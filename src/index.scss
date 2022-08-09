@@ -6,7 +6,7 @@
   --font-family-primary: Verdana, Arial, sans-serif;
 
   --popup-spring: 0.3s;
-  --popup-fade-in: 0.3s;
+  --popup-fade-in: 0.3s; // should be in seconds, used in JS
 }
 
 * {

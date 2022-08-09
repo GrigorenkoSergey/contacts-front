@@ -18,6 +18,10 @@
     cursor: pointer;
   }
 
+  &Toggler:focus {
+    outline: 1px solid;
+  }
+
   &Toggler::before {
     --border-color: blue;
     visibility: hidden;

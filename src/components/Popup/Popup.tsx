@@ -12,8 +12,6 @@ type Props = {
   onCancel: () => void
 };
 
-const HIDING_ANIMATION_TIME = 300; // should equals than in css
-
 // You should insert Popup before its siblings for proper blur.
 export function Popup(x: Props) {
   const { title, children, onAccept, onCancel, okIsDisabled } = x;
@@ -21,8 +19,12 @@ export function Popup(x: Props) {
   const container = useRef<HTMLDivElement>(null);
 
   const handleCancel = () => {
+    const time = parseFloat(
+      getComputedStyle(document.documentElement)
+        .getPropertyValue('--popup-fade-in')
+    ) * 1000;
     container.current?.classList.add(s.fadeIn);
-    setTimeout(onCancel, HIDING_ANIMATION_TIME);
+    setTimeout(onCancel, time);
   };
 
   useEffect(() => {
@@ -50,7 +52,13 @@ export function Popup(x: Props) {
   }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    onAccept(e);
+    container.current?.classList.add(s.fadeIn);
+    const time = parseFloat(
+      getComputedStyle(document.documentElement)
+        .getPropertyValue('--popup-fade-in')
+    ) * 1000;
+
+    setTimeout(() => onAccept(e), time);
     e.preventDefault();
   };
 
