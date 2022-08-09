@@ -1,17 +1,20 @@
 import React from 'react';
+import { observer } from 'mobx-react-lite';
+import { Add, Delete } from '../../../../assets/icons';
 import { contacts } from '../../../../store';
+import { cn } from '../../../../utils';
 import { ContactItem } from './ContactItem';
 
 import s from './ContactList.module.scss';
 
-type Popup = 'edit' | 'info';
+type Popup = 'edit' | 'info' | 'add' | 'delete';
 
 type Props = {
   list: typeof contacts.contacts[number][]
   setPopup: (w: Popup) => void
 };
 
-export const ContactList = (x: Props) => {
+export const ContactList = observer((x: Props) => {
   const { list, setPopup } = x;
 
   const handleItemSelect = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
@@ -31,24 +34,24 @@ export const ContactList = (x: Props) => {
 
   return (
     <div className={s.list}>
-      { /* <span className={s.listHeader}>№</span>
-        <span className={cn(s.listHeader, s.name)}>Имя</span>
-        <span className={cn(s.listHeader, s.phone)}>Телефон</span>
-        <span className={cn(s.listHeader, s.emai)}>Email</span> */ }
+      <span className={s.listHeader}>№</span>
+      <span className={s.listHeader}>Имя</span>
+      <span className={s.listHeader}>Телефон</span>
+      <span className={s.listHeader}>Email</span>
 
-      { /* <div className={cn(s.listHeader, s.iconWrapper)}>
-          { contacts.idsToRemove.size > 0 && (
-            <Delete width={25}
-                    className={s.delete}
-                    onClick={() => setPopup('delete')} />
-          ) }
-        </div>
+      <div className={cn(s.listHeader, s.iconWrapper)}>
+        { contacts.idsToRemove.size > 0 && (
+          <Delete width={25}
+                  className={s.delete}
+                  onClick={() => setPopup('delete')} />
+        ) }
+      </div>
 
-        <div className={cn(s.listHeader, s.iconWrapper)}>
-          <Add width={20}
-               className={s.add}
-               onClick={() => setPopup('add')} />
-        </div> */ }
+      <div className={cn(s.listHeader, s.iconWrapper)}>
+        <Add width={20}
+             className={s.add}
+             onClick={() => setPopup('add')} />
+      </div>
       <>
         { list.map((c, i) => (
           <React.Fragment key={c.id}>
@@ -62,4 +65,4 @@ export const ContactList = (x: Props) => {
       </>
     </div>
   );
-};
+});

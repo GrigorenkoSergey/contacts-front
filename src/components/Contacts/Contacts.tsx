@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { contacts } from '../../store';
-import { Delete, Add, User, DoorExit } from '../../assets/icons';
+import { User, DoorExit } from '../../assets/icons';
 import { cn } from '../../utils';
 import { Popup } from '../Popup';
 import {
@@ -50,6 +50,24 @@ export const Contacts = observer((x: Props) => {
   return (
     <div className={cn(s.contacts, x.className)}>
       { popup && popupMapper({ onCancel, onAccept })[popup] }
+
+      <div className={s.header}>
+        <div className={s.userIcon}>
+          <User width={30} />
+        </div>
+        <span className={s.userName}>Константин Констинтинопольский</span>
+
+        <section className={s.search}>
+          <input type="text"
+                 className={s.searchInput}
+                 value={filter}
+                 onChange={e => setFilter(e.target.value)}></input>
+        </section>
+
+        <DoorExit width={25}
+                  className={s.signOut}
+                  onClick={() => setPopup('exit')} />
+      </div>
 
       <ContactList list={filteredContacts}
                    setPopup={setPopup} />

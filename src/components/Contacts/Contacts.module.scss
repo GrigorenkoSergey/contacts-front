@@ -29,6 +29,7 @@ $grid-template-columns-2: 32px minmax(auto, 300px) minmax(auto, 200px) minmax(au
   grid-template-columns: auto 1fr auto;
   gap: 15px 5px;
   padding: 5px;
+  padding-bottom: 12px;
 
   @media (min-width: 400px) {
     display: grid;
@@ -65,18 +66,39 @@ $grid-template-columns-2: 32px minmax(auto, 300px) minmax(auto, 200px) minmax(au
 .userName {
   grid-area: name;
   align-self: center;
+  text-align: end;
 }
 
 .search {
   grid-area: search;
+  justify-self: end;
 
   @media (min-width: 400px) {
     justify-self: end;
+    margin-right: 5px;
   }
 
   @media (min-width: 700px) {
-    margin-left: 10px;
     margin-right: 10px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &Input {
+    border-radius: 10000px;
+    border: 1px solid var(--primary-color);
+    outline: none;
+    padding: 5px 35px 5px 10px;
+    font-size: 14px;
+    background-image: url('../../assets/icons/search.svg');
+    background-repeat: no-repeat;
+    background-position: center right 10px;
+    background-size: 20px;
+  }
+
+  &Input:focus {
+    box-shadow: 0 0 5px gray;
   }
 }
 
@@ -87,20 +109,4 @@ $grid-template-columns-2: 32px minmax(auto, 300px) minmax(auto, 200px) minmax(au
   @media (min-width: 700px) {
     margin-left: auto;
   }
-}
-
-.searchInput {
-  border-radius: 10000px;
-  border: 1px solid var(--primary-color);
-  outline: none;
-  padding: 5px 35px 5px 10px;
-  font-size: 14px;
-  background-image: url('../../assets/icons/search.svg');
-  background-repeat: no-repeat;
-  background-position: center right 10px;
-  background-size: 20px;
-}
-
-.searchInput:focus {
-  box-shadow: 0 0 5px gray;
 }

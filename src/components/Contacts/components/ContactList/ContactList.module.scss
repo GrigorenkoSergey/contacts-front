@@ -29,8 +29,9 @@ $min-row-height: 35px;
   overflow-y: scroll;
   display: grid;
   padding: 5px;
+  padding-top: 0;
   margin: 10px 0;
-  grid-template-columns: minmax(240px, auto) 40px;
+  grid-template-columns: minmax(230px, auto) 40px;
   grid-auto-flow: dense;
 
   @media (min-width: 700px) {
@@ -48,7 +49,7 @@ $min-row-height: 35px;
     }
   }
 
-  @for $i from 6 through 0 {
+  @for $i from 7 through 1 {
     &>:nth-child(14n - #{$i}) {
       background-color: aliceblue;
     }
@@ -62,6 +63,12 @@ $min-row-height: 35px;
     background-color: #fff;
     border-bottom: 1px solid var(--primary-color);
     z-index: 5;
+    margin-bottom: 5px;
+    display: none;
+
+    @media (min-width: 700px) {
+      display: block;
+    }
   }
 }
 
@@ -167,5 +174,4 @@ svg {
 
 .delete {
   fill: red;
-  transform: scale(1.2);
 }
