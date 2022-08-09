@@ -6,10 +6,10 @@ import { cn } from '../../utils';
 import { Popup } from '../Popup';
 import {
   RemoveContactsPopup, ConfirmExitPopup,
-  ContactsList, ContactPopup,
+  ContactList, ContactPopup,
 } from './components';
 
-import s from './Contacts.module.css';
+import s from './Contacts.module.scss';
 
 type Popup = 'exit' | 'edit' | 'delete' | 'add' | 'info';
 
@@ -51,49 +51,8 @@ export const Contacts = observer((x: Props) => {
     <div className={cn(s.contacts, x.className)}>
       { popup && popupMapper({ onCancel, onAccept })[popup] }
 
-      <div className={s.header}>
-        <div className={cn(s.iconWrapper, s.userIcon)}>
-          <User width={30} />
-        </div>
-        <span className={s.userName}>Константин Констинтинопольский</span>
-
-        <section className={s.search}>
-          <input type="text"
-                 className={s.searchInput}
-                 value={filter}
-                 onChange={e => setFilter(e.target.value)}></input>
-        </section>
-
-        <DoorExit width={30}
-                  className={s.signOut}
-                  onClick={() => setPopup('exit')} />
-      </div>
-
-      { /* <div className={s.list}>
-
-        <span className={s.listHeader}>№</span>
-        <span className={cn(s.listHeader, s.name)}>Имя</span>
-        <span className={cn(s.listHeader, s.phone)}>Телефон</span>
-        <span className={cn(s.listHeader, s.emai)}>Email</span>
-
-        <div className={cn(s.listHeader, s.iconWrapper)}>
-          { contacts.idsToRemove.size > 0 && (
-            <Delete width={25}
-                    className={s.delete}
-                    onClick={() => setPopup('delete')} />
-          ) }
-        </div>
-
-        <div className={cn(s.listHeader, s.iconWrapper)}>
-          <Add width={20}
-               className={s.add}
-               onClick={() => setPopup('add')} />
-        </div>
-
-        <ContactsList list={filteredContacts}
-                      setPopup={setPopup} />
-      </div> */ }
-
+      <ContactList list={filteredContacts}
+                   setPopup={setPopup} />
     </div>
   );
 });

@@ -9,26 +9,26 @@
   border: 0;
   cursor: pointer;
   font-family: var(--font-family-primary);
-}
 
-.button:active {
-  outline: none;
+  &:active {
+    outline: none;
+  }
 }
 
 .themePrimary {
   background: #00acef;
   color: #fff;
-}
 
-.themePrimary:hover {
-  background: #005eef;
-}
+  &:hover {
+    background: #005eef;
+  }
 
-.themePrimary[disabled] {
-  background: #00acef70;
-}
+  &[disabled] {
+    background: #00acef70;
+  }
 
-.themePrimary:enabled:active, 
-.themePrimaryPressed {
-  background: #001162;
+  &:enabled:active,
+  &Pressed {
+    background: #001162;
+  }
 }

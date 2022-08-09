@@ -1,9 +1,13 @@
 .app {
   display: flex;
   flex-direction: column;
-  align-items: center;
+
   max-height: 100vh;
-  padding: 20px;
+  padding: 10px;
+
+  @media (min-width: 400px) {
+    padding: 20px;
+  }
 }
 
 .title {

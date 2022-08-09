@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { LoginForm, RegisterForm, Contacts } from './components';
-import s from './App.module.css';
+import s from './App.module.scss';
 
 export function App() {
   const navigate = useNavigate();

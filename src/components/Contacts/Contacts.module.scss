@@ -1,7 +1,4 @@
-.contacts, .contacts * {
-  --grid-template-columns:
-    32px minmax(auto, 300px) minmax(auto, 200px) minmax(auto, 300px) 40px 40px;
-}
+$grid-template-columns-2: 32px minmax(auto, 300px) minmax(auto, 200px) minmax(auto, 300px) 40px 40px;
 
 .contacts {
   border: 1px solid var(--primary-color);
@@ -10,12 +7,14 @@
   display: flex;
   flex-direction: column;
   overflow: auto;
-}
+  padding: 5px;
 
-@media (min-width: 400px) {}
+  @media (min-width: 500px) {
+    align-self: center;
+    min-width: 460px;
+  }
 
-@media (min-width: 700px) {
-  .contacts {
+  @media (min-width: 700px) {
     padding: 20px;
   }
 }
@@ -30,20 +29,16 @@
   grid-template-columns: auto 1fr auto;
   gap: 15px 5px;
   padding: 5px;
-}
 
-@media (min-width: 400px) {
-  .header {
+  @media (min-width: 400px) {
     display: grid;
     grid-template-areas:
       "icon name   name"
       "icon search exit";
     padding: 10px;
   }
-}
 
-@media (min-width: 700px) {
-  .header {
+  @media (min-width: 700px) {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
@@ -61,10 +56,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
-@media (min-width: 400px) {
-  .userIcon {
+  @media (min-width: 400px) {
     align-self: center;
   }
 }
@@ -76,16 +69,12 @@
 
 .search {
   grid-area: search;
-}
 
-@media (min-width: 400px) {
-  .search {
+  @media (min-width: 400px) {
     justify-self: end;
   }
-}
 
-@media (min-width: 700px) {
-  .search {
+  @media (min-width: 700px) {
     margin-left: 10px;
     margin-right: 10px;
   }
@@ -94,10 +83,8 @@
 .signOut {
   grid-area: exit;
   cursor: pointer;
-}
 
-@media (min-width: 700px) {
-  .signOut {
+  @media (min-width: 700px) {
     margin-left: auto;
   }
 }
@@ -116,53 +103,4 @@
 
 .searchInput:focus {
   box-shadow: 0 0 5px gray;
-}
-
-svg {
-  cursor: pointer;
-}
-
-.delete {
-  fill: red;
-  transform: scale(1.2);
-}
-
-.list {
-  overflow-y: scroll;
-  display: grid;
-  grid-template-columns: var(--grid-template-columns);
-  padding-right: 5px;
-}
-
-.list>* {
-  padding: 10px;
-  display: flex;
-  align-items: center;
-}
-
-.list>:nth-child(12n - 5),
-.list>:nth-child(12n - 4),
-.list>:nth-child(12n - 3),
-.list>:nth-child(12n - 2),
-.list>:nth-child(12n - 1),
-.list>:nth-child(12n) {
-  background-color: aliceblue;
-}
-
-.list>:nth-child(12n - 5) {
-  border-radius: 5px 0 0 5px;
-}
-
-.list>:nth-child(12n) {
-  border-radius: 0 5px 5px 0;
-}
-
-.listHeader {
-  font-weight: bold;
-  min-height: 40px;
-  position: sticky;
-  top: 0;
-  background-color: #fff;
-  border-bottom: 1px solid var(--primary-color);
-  z-index: 5;
 }
