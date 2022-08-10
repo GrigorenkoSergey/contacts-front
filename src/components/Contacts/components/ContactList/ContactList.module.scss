@@ -1,6 +1,5 @@
 $border-radius: 7px;
-$grid-template-columns-2: 32px minmax(auto, 300px) minmax(auto, 200px) minmax(auto, 300px) 40px 40px;
-$min-row-height: 35px;
+$grid-template-columns-2: 32px minmax(auto, 300px) minmax(auto, 200px) minmax(auto, 300px) 40px;
 
 %trim {
   overflow: hidden;
@@ -44,41 +43,60 @@ $min-row-height: 35px;
     align-items: center;
     padding: 5px;
     user-select: none;
-    min-height: $min-row-height;
+
+    @media (min-width: 400px) {
+      padding: 8px;
+    }
   }
 
-  @for $i from 7 through 1 {
-    &>:nth-child(14n - #{$i}) {
+  @for $i from 4 through 0 {
+
+    &>:nth-child(10n - #{$i}) {
       background-color: aliceblue;
     }
   }
 
+  & .emptyContacts {
+    grid-column: 1 / -1;
+    background-color: white;
+  }
+
   &Header {
+    grid-row: 1;
     display: none;
+    z-index: 5;
+
+    background-color: white;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    border-bottom: 1px solid var(--primary-color);
+    margin-bottom: 5px;
 
     @media (min-width: 700px) {
       display: block;
       font-weight: bold;
       min-height: 40px;
-      position: sticky;
-      top: 0;
-      background-color: #fff;
-      border-bottom: 1px solid var(--primary-color);
-      z-index: 5;
-      margin-bottom: 5px;
     }
   }
 }
 
-.delete {
-  @media (min-width: 700px) {
-    display: flex;
-    justify-content: center;
+.add {
+  display: flex;
+  grid-column: 1 / -1;
+
+  &::after {
+    margin-left: 20px;
+    content: 'Добавить контакт'
   }
 
-  &Icon {
-    fill: red;
-    transform: translateY(-2px);
+  @media (min-width: 700px) {
+    grid-column: -2 / -1;
+    justify-content: center;
+
+    &::after {
+      content: none;
+    }
   }
 }
 
@@ -111,22 +129,8 @@ $min-row-height: 35px;
   }
 }
 
-.select {
-  border-top-right-radius: $border-radius;
-  grid-column: 2;
-
-  display: flex;
-  justify-content: center;
-  position: relative;
-
-  @media (min-width: 700px) {
-    grid-column: 5;
-    border-top-right-radius: 0;
-  }
-}
-
 .phone {
-  grid-column: 1;
+  grid-column: 1 / -1;
   @include addTitle('Тел:');
 
   @media (min-width: 700px) {
@@ -136,7 +140,7 @@ $min-row-height: 35px;
 
 .email {
   border-bottom-left-radius: $border-radius;
-  grid-column: 1;
+  grid-column: 1 / -1;
   padding-bottom: 10px;
 
   @include addTitle('Email:');
@@ -147,28 +151,7 @@ $min-row-height: 35px;
   }
 }
 
-.itemDelete {
-  grid-column: 2;
-  border-bottom-right-radius: $border-radius;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @media (min-width: 700px) {
-    display: none;
-  }
-
-  &Icon {
-    fill: red;
-    transform: translateY(-2px) translateX(2px);
-
-    @media (min-width: 700px) {
-      display: none;
-    }
-  }
-}
-
-.edit {
+.options {
   cursor: pointer;
   fill: green;
 
@@ -183,7 +166,7 @@ $min-row-height: 35px;
   }
 
   @media (min-width: 700px) {
-    grid-column: 6;
+    grid-column: 5;
     border-top-right-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
 
@@ -195,9 +178,4 @@ $min-row-height: 35px;
 
 svg {
   cursor: pointer;
-}
-
-.list .emptyContacts {
-  grid-column: 1 / -1;
-  background-color: white;
 }

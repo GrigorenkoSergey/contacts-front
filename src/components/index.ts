@@ -1,6 +1,5 @@
 export * from './Button';
 export * from './Contacts';
-export * from './Checkbox';
 export * from './Field';
 export * from './LoginField';
 export * from './LoginForm';

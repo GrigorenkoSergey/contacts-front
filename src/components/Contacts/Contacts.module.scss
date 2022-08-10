@@ -25,17 +25,13 @@ $grid-template-columns-2: 32px minmax(auto, 300px) minmax(auto, 200px) minmax(au
   display: grid;
   grid-template-areas:
     "icon   name   name"
-    "exit search search";
+    "icon search exit";
   grid-template-columns: auto 1fr auto;
   gap: 15px 5px;
   padding: 5px;
   padding-bottom: 12px;
 
   @media (min-width: 400px) {
-    display: grid;
-    grid-template-areas:
-      "icon name   name"
-      "icon search exit";
     padding: 10px;
   }
 
@@ -48,7 +44,6 @@ $grid-template-columns-2: 32px minmax(auto, 300px) minmax(auto, 200px) minmax(au
 
 .userIcon {
   grid-area: icon;
-  margin-right: 10px;
   width: 40px;
   height: 40px;
   background-color: silver;
@@ -66,7 +61,12 @@ $grid-template-columns-2: 32px minmax(auto, 300px) minmax(auto, 200px) minmax(au
 .userName {
   grid-area: name;
   align-self: center;
+  padding-left: 10px;
   text-align: end;
+
+  @media (min-width: 700px) {
+    text-align: initial;
+  }
 }
 
 .search {

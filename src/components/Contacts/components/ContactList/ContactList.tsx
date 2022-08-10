@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { Add, Delete } from '../../../../assets/icons';
+import { Add } from '../../../../assets/icons';
 import { contacts } from '../../../../store';
 import { cn } from '../../../../utils';
 import { ContactItem } from './ContactItem';
@@ -17,12 +17,7 @@ type Props = {
 export const ContactList = observer((x: Props) => {
   const { list, setPopup } = x;
 
-  const handleItemSelect = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
-    if (e.target.checked) contacts.addToRemoval(id);
-    else contacts.removeFromRemoval(id);
-  };
-
-  const handleNameDoubleClick = (id: number) => {
+  const handleNameClick = (id: number) => {
     contacts.selectedId = id;
     setPopup('info');
   };
@@ -33,39 +28,27 @@ export const ContactList = observer((x: Props) => {
   };
 
   return (
-    <div className={s.list}>
-      <span className={s.listHeader}>№</span>
-      <span className={s.listHeader}>Имя</span>
-      <span className={s.listHeader}>Телефон</span>
-      <span className={s.listHeader}>Email</span>
+    <ul className={s.list}>
+      <li className={s.listHeader}>№</li>
+      <li className={s.listHeader}>Имя</li>
+      <li className={s.listHeader}>Телефон</li>
+      <li className={s.listHeader}>Email</li>
 
-      <div className={cn(s.listHeader, s.delete)}>
-        { contacts.idsToRemove.size > 0 && ( // FIXME вынести в отдельный компонент для ускорения
-          <Delete width={25}
-                  className={s.deleteIcon}
-                  onClick={() => setPopup('delete')} />
-        ) }
-      </div>
-
-      <div className={cn(s.listHeader, s.iconWrapper)}>
+      <li className={cn(s.listHeader, s.add)} onClick={() => setPopup('add')}>
         <Add width={20}
-             className={s.add}
-             onClick={() => setPopup('add')} />
-      </div>
+             className={s.addIcon} />
+      </li>
       <>
         { !list.length && <span className={s.emptyContacts}>Нет контактов...</span> }
         { list.length > 0 && list.map((c, i) => (
           <React.Fragment key={c.id}>
-            <span className={s.number}>{ i + 1 }</span>
+            <li className={s.number}>{ i + 1 }</li>
             <ContactItem contact={c}
-                         isChecked={contacts.idsToRemove.has(c.id)}
-                         onRemoveClick={() => contacts.removeSingle(c.id)}
-                         onNameDoubleClick={() => handleNameDoubleClick(c.id)}
-                         onEditClick={handleEditClick}
-                         onSelect={e => handleItemSelect(e, c.id)} />
+                         onNameClick={() => handleNameClick(c.id)}
+                         onEditClick={handleEditClick} />
           </React.Fragment>
         )) }
       </>
-    </div>
+    </ul>
   );
 });
