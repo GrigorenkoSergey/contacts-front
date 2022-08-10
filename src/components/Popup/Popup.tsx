@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Close } from '../../assets/icons';
 import { Button } from '../';
 
-import s from './Popup.module.css';
+import s from './Popup.module.scss';
 
 type Props = {
   children: React.ReactNode

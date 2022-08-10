@@ -2,7 +2,7 @@ import React from 'react';
 import { User } from '../../assets/icons';
 import { cn } from '../../utils';
 
-import s from './Field.module.css';
+import s from './Field.module.scss';
 
 type Props = {
   placeholder: string

@@ -4,7 +4,7 @@ import { Email } from '../../assets/icons';
 import { cn } from '../../utils';
 import { Button, Field, LoginField, PasswordField } from '../';
 
-import s from './RegisterForm.module.css';
+import s from './RegisterForm.module.scss';
 
 type Props = {
   className?: string

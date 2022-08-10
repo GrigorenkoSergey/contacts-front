@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { contacts } from '../../../../store';
 import { Popup } from '../../../';
-import s from './ContactPopup.module.css';
+import s from './ContactPopup.module.scss';
 
 type PopupType = 'edit' | 'info' | 'add';
 
@@ -95,6 +95,7 @@ export const ContactPopup = (x: Props) => {
           <span className={s.title}>Заметки</span>
           <textarea name="notes"
                     className={s.notes}
+                    rows={5}
                     readOnly={type === 'info'}
                     defaultValue={currentInfo.notes}
                     onChange={e => handleChange(e, 'notes')}></textarea>

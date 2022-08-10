@@ -1,0 +1,128 @@
+$font-size: 14px;
+$color-error: #ca2626;
+
+.fieldset {
+  border-radius: 5px;
+  border: 1px solid transparent;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  &:focus-within {
+    border-color: var(--button-primary-color);
+  }
+
+  &:focus-within .legend {
+    display: initial;
+  }
+}
+
+.label {
+  border-radius: inherit;
+  user-select: none;
+  position: relative;
+}
+
+.legend {
+  margin-left: 15px;
+  padding: 0 6px;
+  color: var(--button-primary-color);
+  font-weight: 400;
+  font-size: 12px;
+  display: none;
+
+  height: 0;
+  position: relative;
+  z-index: 1;
+  top: calc($font-size / -2);
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+
+  border: 0;
+  font-size: $font-size;
+  font-family: var(--font-family-primary);
+  padding-right: 40px;
+  background: var(--button-primary-color);
+  border-radius: inherit;
+  color: white;
+
+  &::placeholder {
+    color: white;
+  }
+
+  &:-internal-autofill-selected~svg.icon path {
+    stroke: gray;
+  }
+
+  &:focus {
+    outline: none;
+    background-color: #fff;
+    color: var(--button-primary-color);
+  }
+
+  &~svg.icon path {
+    stroke: white;
+  }
+
+  &:focus~svg.icon path {
+    stroke: var(--button-primary-color);
+  }
+
+  &[name="email"]:focus~svg.icon path {
+    fill: var(--button-primary-color);
+  }
+
+  &:focus::placeholder {
+    opacity: 0;
+  }
+}
+
+.icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+}
+
+[name$="password"]~.icon {
+  cursor: pointer;
+}
+
+
+.error {
+  &.fieldset {
+    border-color: var(--color-error);
+    position: relative;
+  }
+
+  &Message {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    font-size: 12px;
+    color: var(--color-error);
+  }
+
+  & .legend {
+    color: var(--color-error);
+    visibility: visible;
+  }
+
+  & .input {
+    background-color: transparent;
+    color: var(--color-error);
+  }
+
+  & .icon path {
+    stroke: var(--color-error);
+  }
+
+  & .input~svg.icon path {
+    stroke: var(--color-error);
+  }
+}

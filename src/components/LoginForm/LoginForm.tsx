@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '../../utils';
 import { LoginField, Button, PasswordField } from '../';
-import s from './LoginForm.module.css';
+import s from './LoginForm.module.scss';
 
 type Props = {
   className?: string
