@@ -83,6 +83,7 @@ $grid-template-columns-2: minmax(auto, 50px) minmax(auto, 300px) minmax(auto, 20
 .add {
   display: flex;
   grid-column: 1 / -1;
+  cursor: pointer;
 
   &::after {
     margin-left: 20px;

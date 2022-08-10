@@ -93,7 +93,7 @@ export const ContactPopup = (x: Props) => {
           )) }
 
           <span className={s.title}>Заметки</span>
-          <textarea name="notes" cols={30} rows={5}
+          <textarea name="notes"
                     className={s.notes}
                     readOnly={type === 'info'}
                     defaultValue={currentInfo.notes}

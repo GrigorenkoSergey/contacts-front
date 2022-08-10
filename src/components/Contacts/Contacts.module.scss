@@ -26,13 +26,16 @@ $grid-template-columns-2: 32px minmax(auto, 300px) minmax(auto, 200px) minmax(au
   display: grid;
   grid-template-areas:
     "icon   name   name"
-    "icon search exit";
+    "search search exit";
   grid-template-columns: auto 1fr auto;
   gap: 15px 5px;
   padding: 5px;
   padding-bottom: 12px;
 
   @media (min-width: 400px) {
+    grid-template-areas:
+      "icon   name   name"
+      "icon search exit";
     padding: 10px;
   }
 
