@@ -44,6 +44,7 @@ export const ContactList = observer((x: Props) => {
           <React.Fragment key={c.id}>
             <li className={s.number}>{ i + 1 }</li>
             <ContactItem contact={c}
+                         onRemoveClick={() => {}}
                          onNameClick={() => handleNameClick(c.id)}
                          onEditClick={handleEditClick} />
           </React.Fragment>
