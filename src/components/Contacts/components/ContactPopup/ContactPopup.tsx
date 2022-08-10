@@ -36,7 +36,7 @@ export const ContactPopup = (x: Props) => {
   const [okIsEnabled, setOkIsEnable] = useState(type === 'info' ? true : false);
   const [error, setError] = useState('');
 
-  const handleAcceptClick = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleAcceptClick = () => {
     if (type === 'info') return onAccept();
     if (error) return setError('');
 
@@ -74,6 +74,7 @@ export const ContactPopup = (x: Props) => {
     <Popup title={titleMapper[type]}
            onAccept={handleAcceptClick}
            okIsDisabled={!okIsEnabled}
+           hideControls={type === 'info'}
            onCancel={handleCancelClick}>
       { error && error }
 

@@ -8,6 +8,7 @@ $grid-template-columns-2: 32px minmax(auto, 300px) minmax(auto, 200px) minmax(au
   flex-direction: column;
   overflow: auto;
   padding: 5px;
+  margin-bottom: auto;
 
   @media (min-width: 500px) {
     align-self: center;

@@ -23,7 +23,10 @@ export const createContact = (contact: Omit<Contact, 'id'>): Response<{id: numbe
   return { data: { id } };
 };
 
-export const removeContacts = (idList: number[]): Response<true> => {
+export const removeContact = (id: number): Response<true> => {
+  const index = mockContacts.findIndex(c => c.id === id);
+  mockContacts.splice(index, 1);
+
   return { data: true };
 };
 

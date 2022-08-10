@@ -10,26 +10,17 @@ type Props = {
   okIsDisabled?: boolean
   onAccept: (e: React.FormEvent<HTMLFormElement>) => void
   onCancel: () => void
+  hideControls?: boolean
 };
 
 // You should insert Popup before its siblings for proper blur.
 export function Popup(x: Props) {
-  const { title, children, onAccept, onCancel, okIsDisabled } = x;
+  const { title, children, onAccept, onCancel, okIsDisabled, hideControls } = x;
   const form = useRef<HTMLFormElement>(null);
-  const container = useRef<HTMLDivElement>(null);
-
-  const handleCancel = () => {
-    const time = parseFloat(
-      getComputedStyle(document.documentElement)
-        .getPropertyValue('--popup-fade-in')
-    ) * 1000;
-    container.current?.classList.add(s.fadeIn);
-    setTimeout(onCancel, time);
-  };
 
   useEffect(() => {
     const onEscapePress = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') handleCancel();
+      if (e.key === 'Escape') onCancel();
     };
 
     const catchFocus = (e: FocusEvent) => {
@@ -52,42 +43,39 @@ export function Popup(x: Props) {
   }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    container.current?.classList.add(s.fadeIn);
-    const time = parseFloat(
-      getComputedStyle(document.documentElement)
-        .getPropertyValue('--popup-fade-in')
-    ) * 1000;
-
-    setTimeout(() => onAccept(e), time);
+    onAccept(e);
     e.preventDefault();
   };
 
   return (
-    <div className={s.substrate} ref={container}>
+    <div className={s.substrate}>
       <form className={s.popup} ref={form} tabIndex={1} onSubmit={handleSubmit}>
         <div className={s.header}>
           <h3 className={s.title}>{ title }</h3>
           <Close width={25}
                  className={s.closeBtn}
-                 onClick={handleCancel} />
+                 onClick={onCancel} />
         </div>
 
         <div className={s.content}>
           { children }
         </div>
 
-        <div className={s.footer}>
-          <Button className={s.okBtn}
-                  type="submit"
-                  disabled={okIsDisabled}>
-            OK
-          </Button>
+        { !hideControls && (
+          <div className={s.footer}>
+            <Button className={s.okBtn}
+                    type="submit"
+                    disabled={okIsDisabled}>
+              OK
+            </Button>
 
-          <Button className={s.cancelBtn}
-                  onClick={handleCancel}>
-            Отмена
-          </Button>
-        </div>
+            <Button className={s.cancelBtn}
+                    onClick={onCancel}>
+              Отмена
+            </Button>
+          </div>
+        ) }
+
       </form>
 
     </div>

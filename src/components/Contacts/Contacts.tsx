@@ -33,7 +33,7 @@ export const Contacts = observer((x: Props) => {
   const [popup, setPopup] = useState<Popup>();
   const [filter, setFilter] = useState('');
 
-  useEffect(() => contacts.getContacts(), []);
+  useEffect(() => contacts.fetchContacts(), []);
 
   const filteredContacts = !filter
     ? contacts.contacts

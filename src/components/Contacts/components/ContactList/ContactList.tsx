@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Add } from '../../../../assets/icons';
 import { contacts } from '../../../../store';
@@ -16,6 +16,7 @@ type Props = {
 
 export const ContactList = observer((x: Props) => {
   const { list, setPopup } = x;
+  const ref = useRef<HTMLUListElement>(null);
 
   const handleNameClick = (id: number) => {
     contacts.selectedId = id;
@@ -27,8 +28,13 @@ export const ContactList = observer((x: Props) => {
     setPopup('edit');
   };
 
+  const handleRemoveClick = (id: number) => {
+    contacts.selectedId = id;
+    setPopup('delete');
+  };
+
   return (
-    <ul className={s.list}>
+    <ul className={s.list} ref={ref}>
       <li className={s.listHeader}>№</li>
       <li className={s.listHeader}>Имя</li>
       <li className={s.listHeader}>Телефон</li>
@@ -44,7 +50,8 @@ export const ContactList = observer((x: Props) => {
           <React.Fragment key={c.id}>
             <li className={s.number}>{ i + 1 }</li>
             <ContactItem contact={c}
-                         onRemoveClick={() => {}}
+                         parentRef={ref}
+                         onRemoveClick={handleRemoveClick}
                          onNameClick={() => handleNameClick(c.id)}
                          onEditClick={handleEditClick} />
           </React.Fragment>

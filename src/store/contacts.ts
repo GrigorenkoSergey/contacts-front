@@ -3,14 +3,13 @@ import * as api from '../api';
 
 class Contacts {
   contacts: api.Contact[] = [];
-  idsToRemove = new Set<number>();
   selectedId = 0;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  getContacts() {
+  fetchContacts() {
     this.contacts = api.getContacts();
   }
 
@@ -56,25 +55,17 @@ class Contacts {
       );
     }
 
-    const contact = this.contacts.find(c => c.id === id);
-    if (contact) Object.assign(contact, x);
+    const index = this.contacts.findIndex(c => c.id === id);
+    if (index !== -1) this.contacts.splice(index, 1, x);
     this.selectedId = 0;
     return id;
   }
 
-  addToRemoval(id: number) {
-    this.idsToRemove.add(id);
-  }
+  removeContact() {
+    if (!api.removeContact(this.selectedId)) return;
 
-  removeFromRemoval(id: number) {
-    this.idsToRemove.delete(id);
-  }
-
-  removeContacts() {
-    if (!api.removeContacts(Array.from(this.idsToRemove))) return;
-
-    this.contacts = this.contacts.filter(c => !this.idsToRemove.has(c.id));
-    this.idsToRemove.clear();
+    this.contacts = this.contacts.filter(c => c.id !== this.selectedId);
+    this.selectedId = 0;
   }
 }
 
