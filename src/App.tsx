@@ -1,23 +1,27 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 import { LoginForm, RegisterForm, Contacts } from './components';
+import { auth } from './store';
 import s from './App.module.scss';
 
-export function App() {
+export const App = observer(() => {
   const navigate = useNavigate();
+  const isAuth = auth.checkIsAuth();
+  const path = useLocation().pathname;
 
   useEffect(() => {
-    navigate('/contacts', { replace: true });
-  }, []);
+    if (path === '/' && isAuth) navigate('/contacts', { replace: true });
+  }, [isAuth]);
 
   return (
     <div className={s.app}>
       <Routes>
-        <Route path="/" element={<LoginForm />} />
+        <Route path="/" element={isAuth ? <Contacts /> : <LoginForm />} />
         <Route path="/sign-up" element={<RegisterForm />} />
-        <Route path="/contacts" element={<Contacts />} />
+        <Route path="/contacts" element={isAuth ? <Contacts /> : <LoginForm />} />
         <Route path="*" element={<h1>404</h1>} />
       </Routes>
     </div>
   );
-}
+});

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { contacts } from '../../store';
+import { contacts, auth } from '../../store';
 import { User, DoorExit } from '../../assets/icons';
 import { cn } from '../../utils';
 import { Popup } from '../Popup';
@@ -55,7 +55,7 @@ export const Contacts = observer((x: Props) => {
         <div className={s.userIcon}>
           <User width={30} />
         </div>
-        <span className={s.userName}>Константин Констинтинопольский</span>
+        <span className={s.userName}>{ auth.userName }</span>
 
         <section className={s.search}>
           <input type="text"
