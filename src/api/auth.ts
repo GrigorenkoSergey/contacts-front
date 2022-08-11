@@ -1,21 +1,15 @@
 import { z } from 'zod';
 import { isErrorLike } from '../utils';
 
-type Args = {
-  userName: string
-  password: string
-};
 const URL = 'http://localhost:5000/api/v1/login';
 
-export const auth = async(x: Args): Promise<LoginResult> => {
-  const { password, userName } = x;
-
+export const auth = async(login: string, password: string): Promise<LoginResult> => {
   try {
     const data = await fetch(URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', },
       body: JSON.stringify({
-        username: userName,
+        login,
         password
       })
     });
@@ -38,6 +32,7 @@ const LoginResult = z.union([
   z.object({
     data: z.object({
       msg: z.string(),
+      fullname: z.string(),
       token: z.string()
     }),
     meta: z.unknown().optional()

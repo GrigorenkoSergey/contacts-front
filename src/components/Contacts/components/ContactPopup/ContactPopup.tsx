@@ -36,12 +36,12 @@ export const ContactPopup = (x: Props) => {
   const [okIsEnabled, setOkIsEnable] = useState(type === 'info' ? true : false);
   const [error, setError] = useState('');
 
-  const handleAcceptClick = () => {
+  const handleAcceptClick = async () => {
     if (type === 'info') return onAccept();
     if (error) return setError('');
 
     const { email, name, notes, phone } = currentInfo;
-    const result = contacts[type === 'add' ? 'createContact' : 'updateContact']({ name, email, phone, notes, id: contacts.selectedId });
+    const result = await contacts[type === 'add' ? 'createContact' : 'updateContact']({ name, email, phone, notes, id: contacts.selectedId });
     if (typeof result !== 'number') return setError(result.error);
 
     onAccept();

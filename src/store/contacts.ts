@@ -1,5 +1,6 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import * as api from '../api';
+import { auth } from './auth';
 
 class Contacts {
   contacts: api.Contact[] = [];
@@ -9,11 +10,18 @@ class Contacts {
     makeAutoObservable(this);
   }
 
-  fetchContacts() {
-    this.contacts = api.getContacts();
+  async fetchContacts() {
+    const result = await api.getContacts(auth.token);
+    if ('error' in result) {
+      return /auth/i.test(result.error) && auth.logout();
+    }
+    runInAction(() => {
+      this.contacts = result.data;
+    });
+    return true;
   }
 
-  createContact(x: Omit<api.Contact, 'id'>) {
+  async createContact(x: Omit<api.Contact, 'id'>) {
     const { email, name, phone } = x;
     this.selectedId = 0;
 
@@ -25,16 +33,17 @@ class Contacts {
 
     if (existingContact) return { error: 'Текущий контакт уже существует!' };
 
-    const result = api.createContact(x);
-    if ('error' in result) return { error: 'Не удалось создать контакт!' };
+    const result = await api.createContact(auth.token, x);
+    if ('error' in result) return { error: result.error };
 
     const indexToInsert = this.contacts.findIndex(v => v.name > x.name);
     const id = result.data.id;
+
     this.contacts.splice(indexToInsert, 0, { ...x, id });
     return result.data.id;
   }
 
-  updateContact(x: api.Contact) {
+  async updateContact(x: api.Contact) {
     const { email, name, phone, id } = x;
     const existingContact = this.contacts.find(c =>
       c.name === name
@@ -44,8 +53,8 @@ class Contacts {
 
     if (existingContact) return { error: 'Изменения совпадают с уже существующим контактом!' };
 
-    const result = api.updateContact(x);
-    if ('error' in result) return { error: 'Не удалось обновить контакт.' };
+    const result = await api.updateContact(auth.token, x);
+    if ('error' in result) return { error: result.error };
 
     const receivedId = result.data.id;
 
@@ -61,8 +70,9 @@ class Contacts {
     return id;
   }
 
-  removeContact() {
-    if (!api.removeContact(this.selectedId)) return;
+  async removeContact() {
+    const result = await api.removeContact(auth.token, this.selectedId);
+    if ('error' in result) return;
 
     this.contacts = this.contacts.filter(c => c.id !== this.selectedId);
     this.selectedId = 0;

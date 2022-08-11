@@ -33,7 +33,9 @@ export const Contacts = observer((x: Props) => {
   const [popup, setPopup] = useState<Popup>();
   const [filter, setFilter] = useState('');
 
-  useEffect(() => contacts.fetchContacts(), []);
+  useEffect(() => {
+    contacts.fetchContacts();
+  }, []);
 
   const filteredContacts = !filter
     ? contacts.contacts
@@ -55,7 +57,7 @@ export const Contacts = observer((x: Props) => {
         <div className={s.userIcon}>
           <User width={30} />
         </div>
-        <span className={s.userName}>{ auth.userName }</span>
+        <span className={s.userName}>{ auth.fullName }</span>
 
         <section className={s.search}>
           <input type="text"
