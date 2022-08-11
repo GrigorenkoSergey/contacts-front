@@ -96,7 +96,7 @@ $color-error: #ca2626;
 
 .error {
   &.fieldset {
-    border-color: var(--color-error);
+    border-color: $color-error;
     position: relative;
   }
 
@@ -105,24 +105,24 @@ $color-error: #ca2626;
     top: calc(100% + 2px);
     left: 0;
     font-size: 12px;
-    color: var(--color-error);
+    color: $color-error;
   }
 
   & .legend {
-    color: var(--color-error);
+    color: $color-error;
     visibility: visible;
   }
 
   & .input {
     background-color: transparent;
-    color: var(--color-error);
+    color: $color-error;
   }
 
   & .icon path {
-    stroke: var(--color-error);
+    stroke: $color-error;
   }
 
   & .input~svg.icon path {
-    stroke: var(--color-error);
+    stroke: $color-error;
   }
 }

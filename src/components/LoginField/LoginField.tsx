@@ -16,7 +16,7 @@ export function LoginField(x: Props) {
     <Field className={className}
            type="text"
            placeholder="Логин"
-           errorMessage="Неверный логин"
+           errorMessage="Неизвестный логин"
            autoComplite="username"
            invalid={invalid}
            value={value}
