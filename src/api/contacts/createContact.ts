@@ -1,14 +1,6 @@
 import { z } from 'zod';
 import { commonPart, Contact, ResponseErrorInfo } from './common';
 
-export const createContact = (token: string, body: Omit<Contact, 'id'>) => commonPart({
-  funcName: 'createContact',
-  method: 'post',
-  resultTypeGuard,
-  token,
-  body
-});
-
 const Result = z.union([
   z.object({
     data: Contact,
@@ -17,7 +9,10 @@ const Result = z.union([
   ResponseErrorInfo
 ]);
 
-type Result = z.infer<typeof Result>;
-function resultTypeGuard(r: unknown): r is Result {
-  return Result.safeParse(r).success;
-}
+export const createContact = (token: string, body: Omit<Contact, 'id'>) => commonPart({
+  funcName: 'createContact',
+  method: 'post',
+  resultZodType: Result,
+  token,
+  body
+});

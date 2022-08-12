@@ -81,4 +81,3 @@ class Contacts {
 
 const contacts = new Contacts();
 export { contacts };
-

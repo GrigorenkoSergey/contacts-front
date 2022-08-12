@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z, ZodType } from 'zod';
 import { isErrorLike } from '../../utils';
 
 export const ResponseErrorInfo = z.object({
@@ -16,18 +16,24 @@ export const Contact = z.object({
 
 export type Contact = z.infer<typeof Contact>;
 
-type CommonArgs<T> = {
+type CommonArgs<T extends ZodType<unknown>> = {
   token: string
   method: 'get' | 'put' | 'post' | 'delete'
-  resultTypeGuard: (r: unknown) => r is T
+  resultZodType: T
   funcName: string
   body?: Record<string, unknown>
 };
 
 const URL = 'http://localhost:5000/api/v1/contacts';
 
-export const commonPart = async <T>(x: CommonArgs<T>) => {
-  const { funcName, method, resultTypeGuard, token, body } = x;
+export const commonPart = async <T extends ZodType<unknown>>(x: CommonArgs<T>) => {
+  const { funcName, method, resultZodType: resultType, token, body } = x;
+
+  type Result = z.infer<typeof resultType>;
+
+  function resultTypeGuard(r: unknown): r is Result {
+    return resultType.safeParse(r).success;
+  }
 
   try {
     const data = await fetch(URL, {
@@ -40,8 +46,11 @@ export const commonPart = async <T>(x: CommonArgs<T>) => {
     });
 
     const result = await data.json();
-    if (!resultTypeGuard(result)) throw new Error('Wrong server response schema!');
-    console.log(result);
+
+    if (!resultTypeGuard(result)) {
+      console.log(result);
+      throw new Error('Wrong server response schema!');
+    }
     return result;
 
   } catch(e) {
