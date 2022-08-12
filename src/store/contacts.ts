@@ -36,10 +36,11 @@ class Contacts {
     const result = await api.createContact(auth.token, x);
     if ('error' in result) return { error: result.error };
 
-    const indexToInsert = this.contacts.findIndex(v => v.name > x.name);
     const id = result.data.id;
-
-    this.contacts.splice(indexToInsert, 0, { ...x, id });
+    runInAction(() => {
+      this.contacts.push({ ...x, id });
+      this.contacts.sort((a, b) => a.name.localeCompare(b.name));
+    });
     return result.data.id;
   }
 
@@ -64,9 +65,14 @@ class Contacts {
       );
     }
 
-    const index = this.contacts.findIndex(c => c.id === id);
-    if (index !== -1) this.contacts.splice(index, 1, x);
-    this.selectedId = 0;
+    const contact = this.contacts.find(c => c.id === x.id);
+    if (!contact) throw new Error('Внутренняя ошибка программы!');
+
+    runInAction(() => {
+      Object.assign(contact, x);
+      this.contacts.sort((a, b) => a.name.localeCompare(b.name));
+      this.selectedId = 0;
+    });
     return id;
   }
 
@@ -74,8 +80,10 @@ class Contacts {
     const result = await api.removeContact(auth.token, this.selectedId);
     if ('error' in result) return;
 
-    this.contacts = this.contacts.filter(c => c.id !== this.selectedId);
-    this.selectedId = 0;
+    runInAction(() => {
+      this.contacts = this.contacts.filter(c => c.id !== this.selectedId);
+      this.selectedId = 0;
+    });
   }
 }
 
