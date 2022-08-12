@@ -5,4 +5,3 @@ export * from './LoginField';
 export * from './LoginForm';
 export * from './PasswordField';
 export * from './Popup';
-export * from './RegisterForm';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { cn } from '../../utils';
 import { LoginField, Button, PasswordField } from '../';
 import { auth } from '../../store';
@@ -48,11 +48,6 @@ export function LoginForm(x: Props) {
               disabled={!login || !password}>
         Войти
       </Button>
-
-      <p className={s.footer}>
-        Новичок?&nbsp;
-        <Link to="sign-up">Регистрируйся!!</Link>
-      </p>
     </form>
   );
 }

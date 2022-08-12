@@ -13,7 +13,7 @@ class Auth {
   checkIsAuth() {
     const token = localStorage.getItem('token');
     const fullName = localStorage.getItem('fullName');
-    runInAction(() => {
+    runInAction(() => { // to remove warnings with async actions in strict mode
       this.isAuth = Boolean(token);
       this.token = token || '';
       this.fullName = fullName || '';
@@ -33,7 +33,7 @@ class Auth {
     const result = await api.auth(login, password);
 
     if ('data' in result) {
-      runInAction(() => { // to remove warnings with async actions in strict mode
+      runInAction(() => {
         this.fullName = result.data.fullname;
         this.isAuth = true;
         this.token = result.data.token;

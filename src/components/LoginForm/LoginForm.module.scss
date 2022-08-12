@@ -15,18 +15,11 @@
 }
 
 .title {
+  margin-top: 0;
   color: gray;
 }
 
 .password {
   margin-top: 25px;
   margin-bottom: 25px;
-}
-
-.footer {
-  border-top: 1px solid var(--primary-color);
-  align-self: stretch;
-  text-align: center;
-  padding-top: 10px;
-  margin: 40px 0 0 0;
 }
