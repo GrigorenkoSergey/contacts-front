@@ -1,9 +1,9 @@
 import { z } from 'zod';
 import { isErrorLike } from '../utils';
 
-const URL = 'http://localhost:5000/api/v1/login';
+const URL = 'https://contacts-app-takeoff-staff.herokuapp.com/api/v1/login';
 
-// don't refactor now, because coincidence with contacts/common may be by chance
+// don't refactor now, because coincidence with contacts/common may be an accident
 export const auth = async(login: string, password: string): Promise<LoginResult> => {
   try {
     const data = await fetch(URL, {

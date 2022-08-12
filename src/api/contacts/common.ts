@@ -24,7 +24,7 @@ type CommonArgs<T extends ZodType<unknown>> = {
   body?: Record<string, unknown>
 };
 
-const URL = 'http://localhost:5000/api/v1/contacts';
+const URL = 'https://contacts-app-takeoff-staff.herokuapp.com/api/v1/contacts';
 
 export const commonPart = async <T extends ZodType<unknown>>(x: CommonArgs<T>) => {
   const { funcName, method, resultZodType: resultType, token, body } = x;
