@@ -4,7 +4,6 @@ export { ReactComponent as DoorExit } from './door-exit.svg';
 export { ReactComponent as Email } from './email.svg';
 export { ReactComponent as EyeOff } from './eye-off.svg';
 export { ReactComponent as Eye } from './eye.svg';
-export { ReactComponent as Loader } from './loader.svg';
 export { ReactComponent as Options } from './options.svg';
 export { ReactComponent as Search } from './search.svg';
 export { ReactComponent as User } from './user.svg';
