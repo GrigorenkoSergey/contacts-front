@@ -140,12 +140,16 @@ $grid-template-columns-2: minmax(auto, 50px) minmax(auto, 300px) minmax(auto, 20
 
 .email {
   border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
   grid-column: 1 / -1;
   padding-bottom: 10px;
 
   @include addTitle('Email:');
 
   @media (min-width: 700px) {
+    padding: 8px !important;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     grid-column: 4;
     padding-bottom: inherit;
   }
@@ -161,6 +165,7 @@ $grid-template-columns-2: minmax(auto, 50px) minmax(auto, 300px) minmax(auto, 20
   position: relative;
 
   grid-column: 2;
+  border-top-right-radius: $border-radius;
 
   & svg {
     transform: translateX(2px);
@@ -168,7 +173,6 @@ $grid-template-columns-2: minmax(auto, 50px) minmax(auto, 300px) minmax(auto, 20
 
   @media (min-width: 700px) {
     grid-column: 5;
-    border-top-right-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
 
     & svg {
