@@ -62,12 +62,14 @@ export const Contacts = observer((x: Props) => {
         <section className={s.search}>
           <input type="text"
                  className={s.searchInput}
+                 data-cy="search"
                  value={filter}
                  onChange={e => setFilter(e.target.value)}></input>
         </section>
 
         <DoorExit width={25}
                   className={s.signOut}
+                  data-cy="exit"
                   onClick={() => setPopup('exit')} />
       </div>
 

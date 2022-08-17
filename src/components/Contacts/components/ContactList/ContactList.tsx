@@ -34,7 +34,7 @@ export const ContactList = observer((x: Props) => {
   };
 
   return (
-    <ul className={s.list} ref={ref}>
+    <ul className={s.list} ref={ref} data-cy="contact-list">
       <li className={s.listHeader}>№</li>
       <li className={s.listHeader}>Имя</li>
       <li className={s.listHeader}>Телефон</li>
@@ -42,6 +42,7 @@ export const ContactList = observer((x: Props) => {
 
       <li className={cn(s.listHeader, s.add)} onClick={() => setPopup('add')}>
         <Add width={20}
+             data-cy="add"
              className={s.addIcon} />
       </li>
       <>

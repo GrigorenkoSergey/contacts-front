@@ -44,6 +44,7 @@ export const ContactItem = (x: Props) => {
     <>
       <li className={s.name}>
         <span className={s.nameValue}
+              data-cy="contact-name"
               onClick={onNameClick}>
           { contact.name }
         </span>
@@ -60,6 +61,7 @@ export const ContactItem = (x: Props) => {
       <li className={s.options} ref={option}>
         <Options width={25}
                  height={25}
+                 data-cy="options"
                  onClick={() => setShowMenu(!showMenu)} />
         { showMenu && (
           <ul className={s.optionList} ref={menu}>
