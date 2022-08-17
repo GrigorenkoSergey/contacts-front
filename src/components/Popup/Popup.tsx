@@ -49,7 +49,11 @@ export function Popup(x: Props) {
 
   return (
     <div className={s.substrate}>
-      <form className={s.popup} ref={form} tabIndex={1} onSubmit={handleSubmit}>
+      <form className={s.popup}
+            ref={form}
+            tabIndex={1}
+            onSubmit={handleSubmit}
+            data-cy="popup">
         <div className={s.header}>
           <h3 className={s.title}>{ title }</h3>
           <Close width={25}
