@@ -1,44 +1,16 @@
 /// <reference types="cypress" />
 
+import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 import successResponse from '../fixtures/user1-login-response.json';
 import contacts from '../fixtures/user1-contacts.json';
 
-// ***********************************************
-// This example commands.ts shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+// https://github.com/americanexpress/jest-image-snapshot#optional-configuration
+addMatchImageSnapshotCommand({
+  failureThreshold: 0.03, // 3%
+  failureThresholdType: 'percent',
+  capture: 'viewport',
+  customDiffConfig: { threshold: 0.01 }, // for color comparison
+});
 
 Cypress.Commands.add('login', () => {
   const apiUrl = 'https://contacts-app-takeoff-staff.herokuapp.com/api/v1';

@@ -2,7 +2,7 @@ import contacts from '../fixtures/user1-contacts.json';
 
 const isEqual = Cypress._.isEqual;
 
-describe('auth', () => {
+describe('contacts', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.login();
