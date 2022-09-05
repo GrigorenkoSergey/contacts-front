@@ -1,7 +1,7 @@
 ## [Демо](https://contacts-app-takeoff-staff.herokuapp.com)
 
 ## Установка приложения
-* Склонировать репозиторий `git clone git@github.com:GrigorenkoSergey/takeoff-staff-front.git`
+* Склонировать репозиторий `git clone git@github.com:GrigorenkoSergey/contacts-front.git`
 * Запуск команды `npm install`
 * Запуск приложения `npm run start`
 * Запуск тестов `npm run test`. При запуске спека `snapshots.cy.ts` могут быть ложные ошибки, поскольку снимки записывались на моей системе и могут не совпадать с получившимися в других (здесь я не уверен). При их возникновении, можно просто удалить содержимое директории snapshots и прогнать данную спеку заново (при условии, что не было никаких изменений в файлах до этого, конечно же).
